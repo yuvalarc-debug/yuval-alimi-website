@@ -10,16 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --canvas:         #f3f7f0;
+      --canvas:         #f0f6f3;
       --surface-1:      #ffffff;
-      --surface-2:      #e8f2e4;
-      --primary:        #2d6a4f;
-      --primary-bright: #40916c;
-      --ink:            #162316;
-      --ink-muted:      #4a6b52;
-      --ink-subtle:     #8aab8a;
-      --hairline:       #cce0c8;
-      --shadow:         0 2px 20px rgba(45,106,79,0.10);
+      --surface-2:      #e2eeea;
+      --primary:        #2a6658;
+      --primary-bright: #3d887a;
+      --ink:            #152820;
+      --ink-muted:      #486858;
+      --ink-subtle:     #88a898;
+      --hairline:       #bcd4cc;
+      --shadow:         0 2px 20px rgba(42,102,88,0.10);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -31,14 +31,11 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    /* Subtle leaf-texture background for the whole page */
+    /* Misty background wash for sections below the hero */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: -1;
-      background:
-        url("https://images.unsplash.com/photo-1448375240828-eab0d940b3d8?auto=format&fit=crop&w=1920&q=60")
-        center / cover no-repeat fixed;
-      opacity: 0.07;
+      background: linear-gradient(180deg, #f4f9f6 0%, #eaf4f0 60%, #ddeee8 100%);
     }
     a { color: inherit; text-decoration: none; }
 
@@ -73,19 +70,17 @@
     }
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
-      background:
-        url("https://images.unsplash.com/photo-1448375240828-eab0d940b3d8?auto=format&fit=crop&w=1920&q=75")
-        center / cover no-repeat;
+      overflow: hidden;
     }
+    .hero-bg svg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+    }
+    /* Subtle left-side text readability gradient */
     .hero-bg::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(243,247,240,0.82) 0%,
-        rgba(220,240,218,0.75) 50%,
-        rgba(200,232,195,0.65) 100%
-      );
+      background: radial-gradient(ellipse 70% 80% at 35% 50%, rgba(240,248,244,0.45) 0%, transparent 70%);
     }
     .hero-inner {
       position: relative; z-index: 3;
@@ -503,7 +498,141 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
+    <div class="hero-bg">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f9fbf9"/>
+            <stop offset="50%" stop-color="#eaf4ef"/>
+            <stop offset="100%" stop-color="#d4e8e2"/>
+          </linearGradient>
+          <linearGradient id="m0" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#b8cec8" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#a8c0bc" stop-opacity=".32"/>
+          </linearGradient>
+          <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#9ab8b2" stop-opacity=".38"/>
+            <stop offset="100%" stop-color="#88a8a2" stop-opacity=".52"/>
+          </linearGradient>
+          <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#729898" stop-opacity=".52"/>
+            <stop offset="100%" stop-color="#608888" stop-opacity=".65"/>
+          </linearGradient>
+          <linearGradient id="m3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4e7880" stop-opacity=".72"/>
+            <stop offset="100%" stop-color="#3c6870" stop-opacity=".84"/>
+          </linearGradient>
+          <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#eef7f4" stop-opacity="0"/>
+            <stop offset="38%" stop-color="#eef7f4" stop-opacity=".88"/>
+            <stop offset="62%" stop-color="#eef7f4" stop-opacity=".88"/>
+            <stop offset="100%" stop-color="#eef7f4" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#b8d4ce" stop-opacity=".58"/>
+            <stop offset="100%" stop-color="#9ac0ba" stop-opacity=".35"/>
+          </linearGradient>
+          <filter id="fb"><feGaussianBlur stdDeviation="14"/></filter>
+          <filter id="fm"><feGaussianBlur stdDeviation="6"/></filter>
+          <filter id="fl"><feGaussianBlur stdDeviation="2"/></filter>
+        </defs>
+
+        <!-- Sky -->
+        <rect width="1440" height="900" fill="url(#sg)"/>
+
+        <!-- Far background mountains -->
+        <path filter="url(#fb)" fill="url(#m0)"
+          d="M380,560 C430,460 475,420 525,388 C565,362 605,372 645,338
+             C682,308 715,320 748,294 C780,268 818,278 852,305
+             C882,328 914,318 948,345 C978,368 1004,398 1034,432
+             C1058,460 1075,490 1098,528 L1098,720 L380,720Z"/>
+
+        <!-- Mid-distant mountains -->
+        <path filter="url(#fb)" fill="url(#m1)"
+          d="M310,640 C348,552 388,510 438,476 C478,448 512,458 548,426
+             C582,396 612,406 646,378 C678,352 712,368 742,392
+             C768,412 796,400 828,376 C860,352 895,368 924,396
+             C950,420 972,450 998,482 C1024,514 1046,546 1072,578
+             C1094,606 1112,634 1140,665 L1140,840 L310,840Z"/>
+
+        <!-- Mist band 1 -->
+        <rect x="0" y="460" width="1440" height="115" fill="url(#mist)" filter="url(#fm)" opacity=".6"/>
+
+        <!-- Middle mountains -->
+        <path filter="url(#fm)" fill="url(#m2)"
+          d="M228,740 C268,655 308,612 358,578 C398,550 428,560 464,532
+             C498,506 524,515 558,490 C590,467 618,476 650,453
+             C680,432 708,444 736,426 C762,408 790,424 815,444
+             C840,464 868,455 898,472 C928,490 952,515 982,542
+             C1012,570 1038,598 1070,628 C1098,654 1122,680 1152,708
+             C1176,730 1198,755 1228,780 L1228,900 L228,900Z"/>
+
+        <!-- Mist band 2 -->
+        <rect x="0" y="552" width="1440" height="145" fill="url(#mist)" opacity=".92"/>
+
+        <!-- Left main mountain -->
+        <path fill="url(#m3)"
+          d="M0,900 L0,82
+             C22,58 48,32 76,18 C102,4 130,-2 156,12
+             C180,26 198,54 212,84 C224,110 232,140 240,170
+             C248,198 256,225 268,252 C280,278 294,300 308,328
+             C320,356 326,385 332,414 C338,440 343,466 350,492
+             C358,518 368,540 380,564 C392,588 404,610 415,636
+             C425,660 430,684 435,710 C439,732 441,756 443,780
+             C444,800 444,822 444,844 L444,900Z"/>
+
+        <!-- Right main mountain -->
+        <path fill="url(#m3)"
+          d="M1440,900 L1440,118
+             C1420,92 1396,64 1368,44 C1340,24 1310,14 1284,28
+             C1258,42 1240,70 1226,100 C1213,126 1202,155 1192,184
+             C1181,212 1170,238 1158,264 C1145,292 1130,316 1117,344
+             C1105,372 1095,402 1085,430 C1075,456 1065,480 1056,508
+             C1047,534 1040,560 1034,588 C1027,615 1023,642 1018,669
+             C1014,694 1011,720 1008,746 C1005,768 1003,792 1001,816
+             L998,900Z"/>
+
+        <!-- Water / lake reflection -->
+        <ellipse cx="720" cy="862" rx="268" ry="30" fill="url(#wg)" filter="url(#fl)"/>
+        <ellipse cx="720" cy="862" rx="185" ry="18" fill="rgba(200,228,222,.32)"/>
+
+        <!-- Foreground mist -->
+        <rect x="0" y="730" width="1440" height="170" fill="url(#mist)" opacity=".5"/>
+
+        <!-- Trees left -->
+        <g fill="#2e4848" opacity=".68">
+          <line x1="96" y1="882" x2="96" y2="808" stroke="#2e4848" stroke-width="2.2"/>
+          <path d="M80,828 Q96,798 112,828 Q96,815 80,828Z"/>
+          <path d="M82,813 Q96,784 110,813 Q96,800 82,813Z"/>
+          <line x1="150" y1="888" x2="150" y2="824" stroke="#2e4848" stroke-width="1.8"/>
+          <path d="M136,842 Q150,815 164,842 Q150,830 136,842Z"/>
+          <path d="M138,828 Q150,805 162,828 Q150,818 138,828Z"/>
+          <line x1="54" y1="890" x2="54" y2="848" stroke="#2e4848" stroke-width="1.4"/>
+          <path d="M44,860 Q54,840 64,860 Q54,851 44,860Z"/>
+        </g>
+
+        <!-- Trees right -->
+        <g fill="#2e4848" opacity=".68">
+          <line x1="1316" y1="882" x2="1316" y2="808" stroke="#2e4848" stroke-width="2.2"/>
+          <path d="M1300,828 Q1316,798 1332,828 Q1316,815 1300,828Z"/>
+          <path d="M1302,813 Q1316,784 1330,813 Q1316,800 1302,813Z"/>
+          <line x1="1368" y1="888" x2="1368" y2="824" stroke="#2e4848" stroke-width="1.8"/>
+          <path d="M1354,842 Q1368,815 1382,842 Q1368,830 1354,842Z"/>
+          <path d="M1356,828 Q1368,805 1380,828 Q1368,818 1356,828Z"/>
+          <line x1="1258" y1="890" x2="1258" y2="850" stroke="#2e4848" stroke-width="1.4"/>
+          <path d="M1248,862 Q1258,842 1268,862 Q1258,853 1248,862Z"/>
+        </g>
+
+        <!-- Foreground rocks left -->
+        <path d="M0,900 C18,882 46,874 76,878 C105,882 130,893 160,890
+                 C182,888 204,880 228,884 C248,888 268,896 285,894 L285,900Z"
+          fill="#3a5255" opacity=".52"/>
+        <!-- Foreground rocks right -->
+        <path d="M1155,900 C1175,886 1202,878 1232,882 C1262,886 1290,895 1318,892
+                 C1342,889 1368,880 1396,884 C1418,887 1432,895 1440,898 L1440,900Z"
+          fill="#3a5255" opacity=".52"/>
+      </svg>
+    </div>
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-badge">אדריכל יובל אלימי · מדריך מקצועי 2025</div>
