@@ -28,7 +28,7 @@ function emailHtml({ email, guideTitle, guideUrl, guideDescription }) {
               <tr>
                 <td>
                   <div style="display:inline-block; background:#52b788; border-radius:10px; width:40px; height:40px; text-align:center; line-height:40px; font-weight:800; font-size:16px; color:#050a05; vertical-align:middle;">YA</div>
-                  <span style="color:#e8f5ee; font-size:16px; font-weight:700; vertical-align:middle; margin-right:10px;">יובל עלימי</span>
+                  <span style="color:#e8f5ee; font-size:16px; font-weight:700; vertical-align:middle; margin-right:10px;">יובל אלימי</span>
                 </td>
               </tr>
             </table>
@@ -97,11 +97,11 @@ function emailHtml({ email, guideTitle, guideUrl, guideDescription }) {
         <tr>
           <td style="background:#050a05; border-radius:0 0 16px 16px; padding: 32px 40px; text-align:right;">
             <p style="color:#4d6b5a; font-size:13px; line-height:1.7;">
-              קיבלת מייל זה כי נרשמת לקבל את המדריך באתר יובל עלימי.<br/>
+              קיבלת מייל זה כי נרשמת לקבל את המדריך באתר יובל אלימי.<br/>
               שאלות? ענה על מייל זה או כתוב ל־<a href="mailto:yuvalarc@gmail.com" style="color:#52b788;">yuvalarc@gmail.com</a>
             </p>
             <p style="color:#2d422d; font-size:12px; margin-top:16px;">
-              © 2025 יובל עלימי ייעוץ בנייה ירוקה · תל אביב-יפו
+              © 2025 יובל אלימי ייעוץ בנייה ירוקה · תל אביב-יפו
             </p>
           </td>
         </tr>
@@ -128,28 +128,31 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'כתובת מייל לא תקינה' });
   }
 
-  try {
-    // Send guide to subscriber
-    await resend.emails.send({
-      from: `${process.env.SENDER_NAME || 'יובל עלימי'} <${process.env.FROM_EMAIL || 'onboarding@resend.dev'}>`,
-      to: email,
-      subject: `המדריך שלך מוכן: ${guideTitle}`,
-      html: emailHtml({ email, guideTitle, guideUrl, guideDescription }),
-    });
+  const from = `${process.env.SENDER_NAME || 'יובל אלימי'} <${process.env.FROM_EMAIL || 'onboarding@resend.dev'}>`;
 
-    // Notify owner
-    if (process.env.NOTIFICATION_EMAIL) {
-      await resend.emails.send({
-        from: `${process.env.SENDER_NAME || 'יובל עלימי'} <${process.env.FROM_EMAIL || 'onboarding@resend.dev'}>`,
-        to: process.env.NOTIFICATION_EMAIL,
-        subject: `ליד חדש — ${guideTitle}`,
-        html: `<div dir="rtl" style="font-family:Arial; padding:20px;"><p>מייל חדש נרשם למדריך "<strong>${guideTitle}</strong>":</p><p style="font-size:20px; color:#52b788;">${email}</p></div>`,
-      });
-    }
+  // Send guide to subscriber
+  const { data: d1, error: e1 } = await resend.emails.send({
+    from,
+    to: email,
+    subject: `המדריך שלך מוכן: ${guideTitle}`,
+    html: emailHtml({ email, guideTitle, guideUrl, guideDescription }),
+  });
 
-    return res.status(200).json({ success: true });
-  } catch (err) {
-    console.error('Resend error:', err);
-    return res.status(500).json({ error: 'שגיאה בשליחת המייל' });
+  if (e1) {
+    console.error('Resend subscriber error:', JSON.stringify(e1));
+    return res.status(500).json({ error: e1.message || 'שגיאה בשליחת המייל' });
   }
+
+  // Notify owner
+  if (process.env.NOTIFICATION_EMAIL) {
+    const { error: e2 } = await resend.emails.send({
+      from,
+      to: process.env.NOTIFICATION_EMAIL,
+      subject: `ליד חדש — ${guideTitle}`,
+      html: `<div dir="rtl" style="font-family:Arial; padding:20px;"><p>מייל חדש נרשם למדריך "<strong>${guideTitle}</strong>":</p><p style="font-size:20px; color:#52b788;">${email}</p></div>`,
+    });
+    if (e2) console.error('Resend notify error:', JSON.stringify(e2));
+  }
+
+  return res.status(200).json({ success: true, id: d1?.id });
 };
