@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>המדריך המלא לבנייה ירוקה בישראל 2025 — יובל אלימי</title>
-  <meta name="description" content="כל מה שצריך לדעת על LEED, BREEAM, ודירוג ירוק ישראלי — במדריך PDF חינמי" />
+  <meta name="description" content="כל מה שצריך לדעת על LEED, BREEAM, ודירוג ירוק ישראלי — מדריך מקצועי חינמי מאת יועץ בנייה ירוקה" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -100,9 +100,7 @@
     .hero-proof {
       display: flex; align-items: center; gap: 16px; margin-top: 32px;
     }
-    .avatars {
-      display: flex;
-    }
+    .avatars { display: flex; }
     .avatar {
       width: 36px; height: 36px; border-radius: 50%;
       background: var(--surface-2); border: 2px solid var(--canvas);
@@ -165,7 +163,7 @@
       margin-top: 12px;
     }
 
-    /* WHAT YOU GET */
+    /* SECTIONS */
     .section { padding: 96px 48px; }
     @media (max-width: 768px) { .section { padding: 64px 24px; } }
     .container { max-width: 1200px; margin: 0 auto; }
@@ -192,17 +190,11 @@
       transition: background 0.2s;
     }
     .benefit-card:hover { background: var(--surface-2); }
-    .benefit-icon {
-      font-size: 32px; margin-bottom: 20px; display: block;
-    }
-    .benefit-title {
-      font-size: 18px; font-weight: 700; margin-bottom: 10px;
-    }
-    .benefit-desc {
-      font-size: 14px; color: var(--ink-muted); line-height: 1.7;
-    }
+    .benefit-icon { font-size: 32px; margin-bottom: 20px; display: block; }
+    .benefit-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .benefit-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.7; }
 
-    /* CHAPTERS */
+    /* CHAPTERS TOC */
     .chapters-section {
       background: var(--surface-1);
       border-top: 1px solid var(--hairline);
@@ -240,6 +232,186 @@
     .about-name { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
     .about-role { font-size: 14px; color: var(--primary); font-weight: 600; margin-bottom: 16px; }
     .about-bio { font-size: 15px; color: var(--ink-muted); line-height: 1.75; }
+
+    /* GUIDE CONTENT */
+    .guide-section {
+      padding: 96px 48px;
+      border-top: 1px solid var(--hairline);
+    }
+    @media (max-width: 768px) { .guide-section { padding: 64px 24px; } }
+    .guide-container { max-width: 860px; margin: 0 auto; }
+
+    .guide-chapter {
+      margin-bottom: 80px;
+      padding-bottom: 80px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .guide-chapter:last-child { border-bottom: none; }
+
+    .guide-chapter-header {
+      display: flex; align-items: baseline; gap: 20px; margin-bottom: 36px;
+    }
+    .guide-chapter-num {
+      font-size: 72px; font-weight: 900; color: var(--hairline);
+      letter-spacing: -4px; line-height: 1; flex-shrink: 0;
+    }
+    .guide-chapter-title-wrap { flex: 1; }
+    .guide-chapter-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 6px;
+    }
+    .guide-chapter-title {
+      font-size: clamp(24px, 3vw, 36px); font-weight: 800;
+      letter-spacing: -0.8px; line-height: 1.15;
+    }
+
+    .guide-h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.4px;
+      margin: 36px 0 14px; color: var(--primary);
+    }
+    .guide-h4 {
+      font-size: 17px; font-weight: 700;
+      margin: 28px 0 10px; color: var(--ink);
+    }
+    .guide-p {
+      font-size: 16px; color: var(--ink-muted); line-height: 1.85;
+      margin-bottom: 20px;
+    }
+    .guide-p strong { color: var(--ink); }
+    .guide-p a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Callout boxes */
+    .callout {
+      border-radius: 14px; padding: 24px 28px; margin: 28px 0;
+    }
+    .callout-green {
+      background: rgba(82,183,136,0.08);
+      border: 1px solid rgba(82,183,136,0.25);
+    }
+    .callout-yellow {
+      background: rgba(251,191,36,0.07);
+      border: 1px solid rgba(251,191,36,0.2);
+    }
+    .callout-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .callout-green .callout-label { color: var(--primary); }
+    .callout-yellow .callout-label { color: #fbbf24; }
+    .callout p {
+      font-size: 15px; color: var(--ink-muted); line-height: 1.75; margin: 0;
+    }
+    .callout p strong { color: var(--ink); }
+
+    /* Stats row */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; background: var(--hairline);
+      border-radius: 16px; overflow: hidden; margin: 28px 0;
+    }
+    @media (max-width: 600px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+    .stat-cell {
+      background: var(--surface-1); padding: 24px 20px;
+    }
+    .stat-value {
+      font-size: 28px; font-weight: 900; letter-spacing: -1px;
+      color: var(--ink); margin-bottom: 4px;
+    }
+    .stat-label { font-size: 13px; color: var(--ink-muted); line-height: 1.4; }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%; border-collapse: collapse;
+      margin: 28px 0; font-size: 14px;
+    }
+    .compare-table th {
+      background: var(--surface-2); padding: 14px 16px;
+      font-weight: 700; text-align: right; color: var(--ink);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .compare-table td {
+      padding: 14px 16px; border-bottom: 1px solid var(--hairline);
+      color: var(--ink-muted); vertical-align: top;
+    }
+    .compare-table tr:hover td { background: rgba(82,183,136,0.04); }
+    .compare-table .highlight { color: var(--ink); font-weight: 600; }
+
+    /* Credit list */
+    .credit-list {
+      margin: 16px 0 24px; padding: 0;
+      list-style: none;
+    }
+    .credit-list li {
+      display: flex; justify-content: space-between;
+      padding: 12px 0; border-bottom: 1px solid var(--hairline);
+      font-size: 14px; color: var(--ink-muted);
+    }
+    .credit-list li:last-child { border-bottom: none; }
+    .credit-list .credit-name { color: var(--ink); font-weight: 600; }
+    .credit-list .credit-points {
+      color: var(--primary); font-weight: 700; font-size: 13px;
+      background: rgba(82,183,136,0.1); padding: 2px 10px;
+      border-radius: 100px;
+    }
+
+    /* Steps */
+    .steps-list { margin: 24px 0; }
+    .step {
+      display: flex; gap: 20px; padding: 20px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--surface-2); border: 1px solid var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: var(--primary);
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .step-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .step-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.65; }
+    .step-duration {
+      font-size: 12px; color: var(--primary); font-weight: 600;
+      margin-top: 6px;
+    }
+
+    /* Strategy cards */
+    .strategy-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0;
+    }
+    @media (max-width: 600px) { .strategy-grid { grid-template-columns: 1fr; } }
+    .strategy-card {
+      background: var(--surface-1); border: 1px solid var(--hairline);
+      border-radius: 16px; padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .strategy-card:hover { border-color: var(--primary); }
+    .strategy-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 10px;
+    }
+    .strategy-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+    .strategy-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.7; }
+    .strategy-saving {
+      margin-top: 14px; font-size: 13px; font-weight: 600;
+      color: var(--primary-bright);
+    }
+
+    /* Resource list */
+    .resource-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0;
+    }
+    @media (max-width: 600px) { .resource-grid { grid-template-columns: 1fr; } }
+    .resource-card {
+      background: var(--surface-1); border: 1px solid var(--hairline);
+      border-radius: 14px; padding: 20px 24px;
+    }
+    .resource-org { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .resource-type {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 10px;
+    }
+    .resource-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
 
     /* CTA BOTTOM */
     .cta-section {
@@ -297,10 +469,10 @@
     <div class="hero-bg"></div>
     <div class="hero-inner">
       <div class="hero-text">
-        <div class="hero-badge">מדריך PDF חינמי · 2025</div>
+        <div class="hero-badge">מדריך מקצועי · 2025</div>
         <h1>המדריך המלא<br/>לבנייה <span class="accent">ירוקה</span><br/>בישראל</h1>
         <p class="hero-sub">LEED, BREEAM, ודירוג ירוק ישראלי — כל ההסמכות, כל המסלולים, כל הטיפים המעשיים. במדריך אחד.</p>
-        <p class="hero-meta">📄 32 עמודים · ⏱ קריאה של 20 דקות · 🆓 ללא עלות</p>
+        <p class="hero-meta">📄 5 פרקים מקצועיים · ⏱ קריאה של 20 דקות · 🆓 ללא עלות</p>
         <div class="hero-proof">
           <div class="avatars">
             <div class="avatar">ד</div>
@@ -308,17 +480,17 @@
             <div class="avatar">ר</div>
             <div class="avatar">ע</div>
           </div>
-          <p class="proof-text"><strong>+340 אדריכלים ויזמים</strong> כבר קיבלו את המדריך</p>
+          <p class="proof-text"><strong>+340 אדריכלים ויזמים</strong> כבר קראו את המדריך</p>
         </div>
       </div>
 
       <!-- FORM -->
       <div class="form-card" id="get-guide">
         <div class="form-card-title">קבל את המדריך עכשיו</div>
-        <div class="form-card-sub">רשום את המייל שלך ואשלח לך את הקובץ ישירות — ללא ספאם, ללא התחייבות.</div>
+        <div class="form-card-sub">רשום את המייל שלך ואשלח לך את הקישור ישירות — ללא ספאם, ללא התחייבות.</div>
         <form id="leadForm">
           <div class="form-group">
-            <input type="text" id="nameInput" class="form-input" placeholder="השם שלך" required />
+            <input type="text" id="nameInput" class="form-input" placeholder="השם שלך" />
           </div>
           <div class="form-group">
             <input type="email" id="emailInput" class="form-input" placeholder="המייל שלך" required />
@@ -328,7 +500,7 @@
           </button>
           <p class="form-note">📨 ישלח ישירות למייל תוך דקה · 🔒 הפרטים שמורים ולא יועברו לאף גורם</p>
           <div class="form-success" id="successMsg">
-            ✅ נשלח! בדוק את תיבת הדואר שלך עוד רגע
+            ✅ נשלח! בדוק את תיבת הדואר שלך — או המשך לקרוא למטה
           </div>
           <div class="form-error" id="errorMsg"></div>
         </form>
@@ -346,7 +518,7 @@
         <div class="benefit-card reveal">
           <span class="benefit-icon">🏆</span>
           <div class="benefit-title">מסלולי הסמכה</div>
-          <div class="benefit-desc">השוואה מלאה בין LEED, BREEAM, WELL, ודירוג ירוק ישראלי — ואיך לבחור את המסלול הנכון.</div>
+          <div class="benefit-desc">השוואה מלאה בין LEED, BREEAM, WELL, ודירוג ירוק ישראלי — ואיך לבחור את המסלול הנכון לפרויקט שלך.</div>
         </div>
         <div class="benefit-card reveal reveal-d1">
           <span class="benefit-icon">💰</span>
@@ -371,13 +543,13 @@
         <div class="benefit-card reveal reveal-d5">
           <span class="benefit-icon">🔋</span>
           <div class="benefit-title">יעילות אנרגטית</div>
-          <div class="benefit-desc">פתרונות מוכחים לחיסכון של 30-50% בצריכת האנרגיה — בתקציב סביר.</div>
+          <div class="benefit-desc">פתרונות מוכחים לחיסכון של 30–50% בצריכת האנרגיה — בתקציב סביר.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CHAPTERS -->
+  <!-- CHAPTERS TOC -->
   <section class="section chapters-section">
     <div class="container">
       <p class="section-label reveal">תוכן עניינים</p>
@@ -386,35 +558,35 @@
         <div class="chapter reveal">
           <div class="chapter-num">01</div>
           <div>
-            <div class="chapter-title">מה זו בנייה ירוקה ולמה זה חשוב עכשיו</div>
+            <div class="chapter-title"><a href="#ch1" style="color:inherit;">מה זו בנייה ירוקה ולמה זה חשוב עכשיו</a></div>
             <div class="chapter-desc">הרקע הרגולטורי, המגמות הגלובליות, ומה זה אומר על שוק הנדל"ן הישראלי</div>
           </div>
         </div>
         <div class="chapter reveal reveal-d1">
           <div class="chapter-num">02</div>
           <div>
-            <div class="chapter-title">מפת מסלולי ההסמכה — LEED, BREEAM, דירוג ירוק</div>
+            <div class="chapter-title"><a href="#ch2" style="color:inherit;">מפת מסלולי ההסמכה — LEED, BREEAM, דירוג ירוק</a></div>
             <div class="chapter-desc">הבדלים מהותיים, עלויות, לוחות זמנים, ואיזה מסלול מתאים לסוג הפרויקט שלך</div>
           </div>
         </div>
         <div class="chapter reveal reveal-d2">
           <div class="chapter-num">03</div>
           <div>
-            <div class="chapter-title">שלבי ההסמכה המלאים</div>
+            <div class="chapter-title"><a href="#ch3" style="color:inherit;">שלבי ההסמכה המלאים</a></div>
             <div class="chapter-desc">מרגע ההחלטה ועד קבלת הלוחית — כל שלב, מי אחראי, ומה המסמכים הנדרשים</div>
           </div>
         </div>
         <div class="chapter reveal reveal-d3">
           <div class="chapter-num">04</div>
           <div>
-            <div class="chapter-title">חיסכון בעלויות: 7 אסטרטגיות שעובדות</div>
+            <div class="chapter-title"><a href="#ch4" style="color:inherit;">חיסכון בעלויות: 7 אסטרטגיות שעובדות</a></div>
             <div class="chapter-desc">כיצד להגיע להסמכה מבלי לנפח את התקציב — כולל מקרי בוחן מישראל</div>
           </div>
         </div>
         <div class="chapter reveal reveal-d4">
           <div class="chapter-num">05</div>
           <div>
-            <div class="chapter-title">משאבים, תקנים, ואנשי קשר</div>
+            <div class="chapter-title"><a href="#ch5" style="color:inherit;">משאבים, תקנים, ואנשי קשר</a></div>
             <div class="chapter-desc">רשימה מקיפה של גופים, תקנים, וספקים רלוונטיים בישראל</div>
           </div>
         </div>
@@ -422,7 +594,7 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ABOUT AUTHOR -->
   <section class="about-section">
     <div class="container">
       <div class="about-inner reveal">
@@ -440,54 +612,387 @@
     </div>
   </section>
 
-  <!-- GUIDE CONTENT PREVIEW -->
-  <section class="section" style="background:var(--surface-1); border-top:1px solid var(--hairline);">
-    <div class="container" style="max-width:860px;">
-      <p class="section-label reveal">תצוגה מקדימה</p>
-      <h2 class="section-title reveal reveal-d1">קטע מתוך המדריך</h2>
+  <!-- ====================================================
+       GUIDE CONTENT — 5 CHAPTERS
+  ===================================================== -->
+  <section class="guide-section" id="guide-content">
+    <div class="guide-container">
 
-      <div class="reveal reveal-d2" style="margin-top:48px; background:var(--canvas); border:1px solid var(--hairline); border-radius:20px; padding:48px; position:relative; overflow:hidden;">
-        <!-- Blur overlay at bottom to tease full content -->
-        <div style="position:absolute; bottom:0; left:0; right:0; height:120px; background:linear-gradient(transparent, var(--canvas)); z-index:2;"></div>
+      <!-- CHAPTER 1 -->
+      <div class="guide-chapter" id="ch1">
+        <div class="guide-chapter-header reveal">
+          <div class="guide-chapter-num">01</div>
+          <div class="guide-chapter-title-wrap">
+            <div class="guide-chapter-label">פרק ראשון</div>
+            <h2 class="guide-chapter-title">מה זו בנייה ירוקה ולמה זה חשוב עכשיו</h2>
+          </div>
+        </div>
 
-        <h3 style="font-size:24px; font-weight:800; margin-bottom:8px; letter-spacing:-0.5px;">פרק 2: השוואת מסלולי ההסמכה</h3>
-        <p style="font-size:12px; color:var(--primary); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:32px;">מדריך לבנייה ירוקה בישראל 2025 · עמודים 14–22</p>
+        <p class="guide-p reveal">ב-2025, בנייה ירוקה כבר אינה "תוספת" או "בונוס שיווקי" — היא הופכת לדרישת בסיס. ממשלת ישראל קידמה את תיקון 15 לחוק הסדרת הבנייה ומספר החלטות ממשלה המחייבות דירוג אנרגטי לבניינים חדשים. האיחוד האירופי עבר את ה-EPBD המחמיר (Energy Performance of Buildings Directive), ומשקיעים בינלאומיים בישראל כבר מתנים עסקאות בעמידה בתקני ESG.</p>
 
-        <h4 style="font-size:17px; font-weight:700; margin-bottom:12px; color:var(--primary);">LEED — Leadership in Energy and Environmental Design</h4>
-        <p style="font-size:15px; color:var(--ink-muted); line-height:1.8; margin-bottom:24px;">
-          LEED הוא תקן ההסמכה הנפוץ ביותר בעולם, שפותח על ידי ה-USGBC האמריקאי. בישראל, LEED מוכר על ידי הרשויות המקומיות ומשמש ככרטיס כניסה לפרויקטים בינלאומיים ולמכרזי ממשלה.
-        </p>
-        <p style="font-size:15px; color:var(--ink-muted); line-height:1.8; margin-bottom:32px;">
-          מסלולי LEED הרלוונטיים לישראל: <strong style="color:var(--ink);">BD+C</strong> (בנייה חדשה), <strong style="color:var(--ink);">O+M</strong> (תפעול ותחזוקה), ו-<strong style="color:var(--ink);">ID+C</strong> (עיצוב פנים). רמות ההסמכה: Certified (40+ נקודות), Silver (50+), Gold (60+), Platinum (80+).
-        </p>
+        <div class="stats-row reveal reveal-d1">
+          <div class="stat-cell">
+            <div class="stat-value">40%</div>
+            <div class="stat-label">מצריכת האנרגיה בישראל — מגזר הבנייה</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-value">1%</div>
+            <div class="stat-label">מהבניינים בישראל מוסמכים ירוק (לעומת 20%+ בגרמניה)</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-value">25–35%</div>
+            <div class="stat-label">חיסכון בעלויות הפעלה בבניין מוסמך</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-value">7–15%</div>
+            <div class="stat-label">פרמיית ערך שוק למשרדים ירוקים בגוש דן</div>
+          </div>
+        </div>
 
-        <div style="background:var(--surface-2); border-radius:12px; padding:24px; margin-bottom:32px;">
-          <p style="font-size:13px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:1px; margin-bottom:16px;">עלויות ריאליות — LEED בישראל</p>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <h3 class="guide-h3 reveal">הרקע הישראלי</h3>
+        <p class="guide-p reveal">בישראל, מדיניות הבנייה הירוקה עוגנה לראשונה בשנת 2011 עם פרסום ת"י 5281 — "בנייה בת קיימא". מאז, מספר צווים ותקנות הרחיבו את ההחלה שלו: בשנת 2020 הפך ת"י 5281 לחובה בכל בנייה ממשלתית, ובשנת 2023 הורחב הכיסוי לפרויקטים מעל 4,000 מ"ר בסיוע ממשלתי.</p>
+
+        <p class="guide-p reveal">במקביל, תוכנית לאומית "ישראל 2030" הגדירה יעדים קונקרטיים: הפחתת 30% בצריכת האנרגיה לנפש בסקטור הבנייה, ו-30% מחשמל ממקורות מתחדשים עד 2030. אלה אינם יעדים וולונטריים — הם מגובים בתמריצים כספיים ובמנגנוני ציות הולכים ומתהדקים.</p>
+
+        <h3 class="guide-h3 reveal">הלחץ הפיננסי</h3>
+        <p class="guide-p reveal">הגורם שמשנה את המשחק אינו רגולציה — הוא כסף. הבנקים הגדולים בישראל (בנק לאומי, בנק הפועלים, מזרחי טפחות) פיתחו מסלולי אשראי ירוק עם ריביות מוטבות של 0.3–0.8% לפרויקטים עם הסמכה מאושרת. קרנות נדל"ן בינלאומיות הפועלות בישראל — Hines, Nuveen, BlackRock — מחייבות הסמכה ירוקה על כל רכישה חדשה.</p>
+
+        <div class="callout callout-green reveal">
+          <div class="callout-label">מקרה בוחן</div>
+          <p>מגדל משרדים בתל אביב שליוויתי קיבל ריבית נמוכה ב-0.6% על הלוואת בנייה של 80 מיליון ₪ בזכות הסמכת LEED Gold. <strong>החיסכון הכולל בריבית על פני 15 שנה: 7.2 מיליון ₪</strong> — פי 4 מעלות ההסמכה עצמה.</p>
+        </div>
+
+        <h3 class="guide-h3 reveal">בנייה ירוקה — ההגדרה המעשית</h3>
+        <p class="guide-p reveal">בנייה ירוקה אינה "בנייה עם פאנלים סולאריים". זהו תהליך תכנון ובנייה הוליסטי שמביא בחשבון חמישה תחומים: <strong>אנרגיה</strong> (יעילות ומקורות מתחדשים), <strong>מים</strong> (שימור וניצול חוזר), <strong>חומרים</strong> (מקומיים, ממוחזרים, בריאים), <strong>איכות סביבה פנימית</strong> (אוויר, אור טבעי, אקוסטיקה), ו<strong>אתר וסביבה</strong> (שמירת מגוון ביולוגי, ניהול נגר עילי).</p>
+
+        <p class="guide-p reveal">הסמכה ירוקה מוסיפה שכבת אימות חיצוני: גוף מוסמך בוחן את הפרויקט מול רשימת קריטריונים מוגדרת, ומנפיק תעודה שמוכרת בינלאומית. ללא הסמכה, הבנייה יכולה להיות "ירוקה בנשמה" אך אינה ניתנת למדידה, להשוואה, או לשיווק לשוק הפיננסי הגלובלי.</p>
+      </div>
+
+      <!-- CHAPTER 2 -->
+      <div class="guide-chapter" id="ch2">
+        <div class="guide-chapter-header reveal">
+          <div class="guide-chapter-num">02</div>
+          <div class="guide-chapter-title-wrap">
+            <div class="guide-chapter-label">פרק שני</div>
+            <h2 class="guide-chapter-title">מפת מסלולי ההסמכה</h2>
+          </div>
+        </div>
+
+        <p class="guide-p reveal">בחירת מסלול הסמכה היא אחת ההחלטות האסטרטגיות החשובות בפרויקט. בחירה שגויה יכולה לעלות מאות אלפי שקלים ולגרום לעיכובים של חצי שנה. להלן סקירה מקצועית של המסלולים הרלוונטיים לשוק הישראלי.</p>
+
+        <h3 class="guide-h3 reveal">LEED — Leadership in Energy and Environmental Design</h3>
+        <p class="guide-p reveal">LEED הוא תקן ההסמכה הנפוץ ביותר בעולם, שפותח על ידי ה-USGBC האמריקאי. בישראל, ה-ILGBC (Israel Green Building Council) הוא הגוף המייצג. LEED מוכר על ידי גופי מימון בינלאומיים, ממשלות, וקרנות נדל"ן ברחבי העולם.</p>
+
+        <h4 class="guide-h4 reveal">מסלולי LEED הרלוונטיים לישראל</h4>
+        <ul class="credit-list reveal">
+          <li><span class="credit-name">BD+C — Building Design and Construction</span><span class="credit-points">לבנייה חדשה</span></li>
+          <li><span class="credit-name">O+M — Operations and Maintenance</span><span class="credit-points">לבניינים קיימים</span></li>
+          <li><span class="credit-name">ID+C — Interior Design and Construction</span><span class="credit-points">לשיפוץ פנים</span></li>
+          <li><span class="credit-name">Residential</span><span class="credit-points">לדיור ועמידה</span></li>
+        </ul>
+
+        <h4 class="guide-h4 reveal">קטגוריות הנקודות — LEED v4.1</h4>
+        <ul class="credit-list reveal reveal-d1">
+          <li><span class="credit-name">Energy and Atmosphere (EA)</span><span class="credit-points">33 נקודות</span></li>
+          <li><span class="credit-name">Indoor Environmental Quality (IEQ)</span><span class="credit-points">16 נקודות</span></li>
+          <li><span class="credit-name">Location and Transportation (LT)</span><span class="credit-points">16 נקודות</span></li>
+          <li><span class="credit-name">Water Efficiency (WE)</span><span class="credit-points">11 נקודות</span></li>
+          <li><span class="credit-name">Materials and Resources (MR)</span><span class="credit-points">13 נקודות</span></li>
+          <li><span class="credit-name">Sustainable Sites (SS)</span><span class="credit-points">10 נקודות</span></li>
+          <li><span class="credit-name">Innovation (IN)</span><span class="credit-points">6 נקודות</span></li>
+          <li><span class="credit-name">Regional Priority (RP) — ישראל</span><span class="credit-points">4 נקודות</span></li>
+        </ul>
+
+        <div class="callout callout-green reveal">
+          <div class="callout-label">טיפ מקצועי</div>
+          <p>עבור ישראל, ה-Regional Priority Credits הם תמיד קשורים לשימור מים (WE 1, WE 2). מאחר ומים הם אתגר טבעי בישראל, רוב הפרויקטים מקבלים נקודות אלו כמעט אוטומטית. <strong>4 נקודות "חינם" שכל פרויקט ישראלי צריך לממש.</strong></p>
+        </div>
+
+        <h3 class="guide-h3 reveal">BREEAM — Building Research Establishment Environmental Assessment</h3>
+        <p class="guide-p reveal">BREEAM הוא התקן הבריטי, פותח ב-1990 ופועל ב-80+ מדינות. בשנים האחרונות גדל השימוש ב-BREEAM בישראל, בעיקר בפרויקטים של חברות בינלאומיות ובנדל"ן מסחרי פרמיום. BREEAM נחשב לקפדני יותר מ-LEED בתחומי ניהול האתר והסביבה הטבעית.</p>
+
+        <h4 class="guide-h4 reveal">קטגוריות BREEAM</h4>
+        <p class="guide-p reveal">BREEAM מכסה 10 קטגוריות: <strong>ניהול</strong>, <strong>בריאות ורווחה</strong>, <strong>אנרגיה</strong>, <strong>תחבורה</strong>, <strong>מים</strong>, <strong>חומרים</strong>, <strong>פסולת</strong>, <strong>שימוש קרקע ואקולוגיה</strong>, <strong>זיהום</strong>, ו<strong>חדשנות</strong>.</p>
+
+        <h3 class="guide-h3 reveal">דירוג ירוק ישראלי — ת"י 5281</h3>
+        <p class="guide-p reveal">הסטנדרט הישראלי, פותח על ידי מכון התקנים הישראלי בשיתוף משרד הבינוי. מתאים למציאות הישראלית — אקלים ים תיכוני, מחסור במים, צפיפות עירונית. הוא חובה בבנייה ממשלתית ומוסדית. 3 כוכבות = 60 נקודות, 4 כוכבות = 75, 5 כוכבות = 90.</p>
+
+        <h3 class="guide-h3 reveal">השוואה מלאה בין המסלולים</h3>
+
+        <div class="reveal" style="overflow-x:auto; margin:28px 0;">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>קריטריון</th>
+                <th>LEED Gold</th>
+                <th>BREEAM Excellent</th>
+                <th>דירוג ירוק 4★</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="highlight">עלות ייעוץ</td>
+                <td>₪80K–150K</td>
+                <td>₪90K–160K</td>
+                <td>₪40K–70K</td>
+              </tr>
+              <tr>
+                <td class="highlight">משך הסמכה</td>
+                <td>18–24 חודשים</td>
+                <td>18–22 חודשים</td>
+                <td>12–18 חודשים</td>
+              </tr>
+              <tr>
+                <td class="highlight">עלות רישום</td>
+                <td>$3,000–8,000</td>
+                <td>£2,500–6,000</td>
+                <td>₪8,000–18,000</td>
+              </tr>
+              <tr>
+                <td class="highlight">הכרה בינלאומית</td>
+                <td>גבוהה מאוד</td>
+                <td>גבוהה</td>
+                <td>ישראל בלבד</td>
+              </tr>
+              <tr>
+                <td class="highlight">מתאים ל...</td>
+                <td>פרויקטים עם מימון בינלאומי, משרדים פרמיום</td>
+                <td>חברות בינלאומיות, קמעונאות רשת</td>
+                <td>בנייה ממשלתית, פרויקטים מקומיים</td>
+              </tr>
+              <tr>
+                <td class="highlight">קושי להשגה</td>
+                <td>בינוני–גבוה</td>
+                <td>גבוה</td>
+                <td>בינוני</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-yellow reveal">
+          <div class="callout-label">איך לבחור?</div>
+          <p>כלל האצבע שלי: <strong>אם הפרויקט מחפש מימון בינלאומי או משכיר לחברות גלובליות — LEED</strong>. אם יש מחויבות חוזית לסטנדרט בריטי (חברת אם בלונדון) — BREEAM. אם הפרויקט ממשלתי או עירוני ישראלי — ת"י 5281. בפרויקטים גדולים עם שאיפות גבוהות ניתן לשלב שני תקנים.</p>
+        </div>
+      </div>
+
+      <!-- CHAPTER 3 -->
+      <div class="guide-chapter" id="ch3">
+        <div class="guide-chapter-header reveal">
+          <div class="guide-chapter-num">03</div>
+          <div class="guide-chapter-title-wrap">
+            <div class="guide-chapter-label">פרק שלישי</div>
+            <h2 class="guide-chapter-title">שלבי ההסמכה המלאים</h2>
+          </div>
+        </div>
+
+        <p class="guide-p reveal">אחת הטעויות הנפוצות ביותר היא להכניס את יועץ הבנייה הירוקה באמצע הפרויקט. זה כמו להזמין אדריכל אחרי שיצקו את היסודות. להלן תיאור מדויק של כל שלב, מי אחראי, ומה קורה בכל נקודה — עבור מסלול LEED BD+C (שהוא הנפוץ ביותר).</p>
+
+        <div class="steps-list reveal reveal-d1">
+          <div class="step">
+            <div class="step-num">1</div>
             <div>
-              <div style="font-size:22px; font-weight:800; color:var(--ink);">₪80K–150K</div>
-              <div style="font-size:13px; color:var(--ink-muted);">עלות ייעוץ LEED Gold, בניין משרדים 3,000 מ"ר</div>
+              <div class="step-title">החלטה ורישום</div>
+              <div class="step-desc">בחירת מסלול הסמכה ויועץ. רישום הפרויקט ב-LEED Online מול GBCI (Green Business Certification Inc.). קביעת ה-LEED AP (Accredited Professional) שיהיה חלק קבוע מצוות הפרויקט. הגדרת יעד ציון (Gold / Platinum).</div>
+              <div class="step-duration">חודשים 1–2 · תקציב: $3,000–8,000 לרישום</div>
             </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
             <div>
-              <div style="font-size:22px; font-weight:800; color:var(--ink);">18–24 חודשים</div>
-              <div style="font-size:13px; color:var(--ink-muted);">משך תהליך הסמכה ממוצע מרגע ההרשמה</div>
+              <div class="step-title">Integrative Process Charrette</div>
+              <div class="step-desc">ישיבת צוות מרוכזת (4–8 שעות) שבה כל בעלי העניין — אדריכל, מהנדס קונסטרוקציה, מהנדס מכניקה, יועץ ירוק, לנדסקייפ — יושבים יחד ומגדירים אסטרטגיה ירוקה לפרויקט. זהו קרדיט LEED חובה (Integrative Process) ושווה 2 נקודות. מחקרים מראים שחברות שמבצעות IP Charrette מקדימות חוסכות 15–25% בעלויות ההסמכה הכוללות.</div>
+              <div class="step-duration">שבוע 3–4 · ציון LEED: 2 נקודות</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <div class="step-title">Schematic Design — אסטרטגיה ירוקה</div>
+              <div class="step-desc">סימולציית אנרגיה ראשונית (Energy Model) לבחינת כיוון המבנה, חלונות, ומערכות HVAC. בחירת קרדיטים למיקוד — לא כל הקרדיטים שווים; יש לבחור את ה"פירות הנמוכים" בהתאם לאופי הפרויקט. הכנת Credit Register — טבלת מעקב מרכזית.</div>
+              <div class="step-duration">חודשים 2–4</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div>
+              <div class="step-title">Design Development — תיעוד מפורט</div>
+              <div class="step-desc">זה השלב ה"כבד" מבחינת תיעוד: חישובי מים מפורטים (WE credits), אישורי חומרים (EPD, HPD), תוכנית Commissioning, חישוב LPD (Lighting Power Density), Energy Model מפורט. עבור כל קרדיט — מסמך הוכחה מוגדר מראש.</div>
+              <div class="step-duration">חודשים 4–10</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div>
+              <div class="step-title">שלב הבנייה — ניהול אתר ירוק</div>
+              <div class="step-desc">ניהול Indoor Air Quality (IAQ) — הגנה על חומרי גמר מלחות ואבק. Construction Waste Management — תיעוד הסטת פסולת ממטמנות (יעד: 75% לפחות). רכש חומרים — שמירת אישורי מקור, EPD ו-HPD לכל חומר רלוונטי. תיעוד צילומי ורישומי שוטף.</div>
+              <div class="step-duration">חודשים 8–18</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <div>
+              <div class="step-title">Commissioning — כוונון מערכות</div>
+              <div class="step-desc">תהליך Cx מפגיש בין תכנון לביצוע: הבודק בוחן שמערכות המכניקה, חשמל, ופלאמביקה אכן עומדות ב-Design Intent. Fundamental Cx הוא חובה (EA Prerequisite). Enhanced Cx מוסיף 6 נקודות נוספות — שווה מאוד לשקול.</div>
+              <div class="step-duration">חודשים 14–20 · ציון LEED: עד 6 נקודות נוספות</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">7</div>
+            <div>
+              <div class="step-title">הגשה ובדיקה</div>
+              <div class="step-desc">העלאת כל המסמכים ל-LEED Online. בחירה בין Design Review (לפני אכלוס) ו-Construction Review (לאחר). ה-GBCI מבצע בדיקה תוך 60–90 ימים ומחזיר הערות (Anticipated or Denied credits). שלב של "מענה לבודק" — בדרך כלל 2–4 שבועות. לאחר אישור — קבלת תעודה ולוחית מוסמכת.</div>
+              <div class="step-duration">חודשים 18–24</div>
             </div>
           </div>
         </div>
 
-        <h4 style="font-size:17px; font-weight:700; margin-bottom:12px; color:var(--primary);">BREEAM — Building Research Establishment Environmental Assessment Method</h4>
-        <p style="font-size:15px; color:var(--ink-muted); line-height:1.8; margin-bottom:24px;">
-          BREEAM הוא התקן הבריטי, ונחשב לקפדני יותר מ-LEED בתחומי הסביבה הטבעית וניהול האתר. בשנים האחרונות גדל השימוש ב-BREEAM בישראל, בעיקר בפרויקטים של חברות בינלאומיות ובנדל"ן מסחרי...
-        </p>
+        <div class="callout callout-yellow reveal">
+          <div class="callout-label">אזהרה נפוצה</div>
+          <p>הטעות הנפוצה ביותר שאני רואה: <strong>הזנחת תיעוד בשלב הבנייה</strong>. אדריכלים ומהנדסים מסיימים את שלב התכנון עם תיק מצוין, אבל קבלנים לא שומרים אישורי חומרים, לא מתעדים פסולת, ולא מגנים על חומרי גמר. התוצאה: קרדיטים שהושקעה בהם עבודה רבה — נופלים. הפתרון: מנהל פרויקט LEED ייעודי באתר.</p>
+        </div>
       </div>
 
-      <div class="reveal reveal-d3" style="text-align:center; margin-top:32px;">
-        <p style="font-size:15px; color:var(--ink-muted); margin-bottom:20px;">הפרק ממשיך עם: WELL Standard, דירוג ירוק ישראלי, ות"י 5281 — <strong style="color:var(--ink);">32 עמודים מלאים במדריך</strong></p>
-        <a href="#get-guide" onclick="document.getElementById('emailInput').focus()" style="display:inline-block; padding:14px 36px; background:var(--primary); color:var(--canvas); border-radius:100px; font-size:15px; font-weight:700; transition:background 0.2s;">
-          קרא את המדריך המלא ←
-        </a>
+      <!-- CHAPTER 4 -->
+      <div class="guide-chapter" id="ch4">
+        <div class="guide-chapter-header reveal">
+          <div class="guide-chapter-num">04</div>
+          <div class="guide-chapter-title-wrap">
+            <div class="guide-chapter-label">פרק רביעי</div>
+            <h2 class="guide-chapter-title">חיסכון בעלויות — 7 אסטרטגיות שעובדות</h2>
+          </div>
+        </div>
+
+        <p class="guide-p reveal">הטענה ש"בנייה ירוקה עולה יותר" היא אחד המיתוסים הנפוצים בתחום. מחקר של World Green Building Council מצא שעלות הבנייה הירוקה גבוהה ב-0–2% בממוצע — אך חוסכת 9–14% בעלויות תפעול על פני 20 שנה. הנה 7 אסטרטגיות שיצמצמו את ה-0–2% הזה עוד יותר.</p>
+
+        <div class="strategy-grid reveal reveal-d1">
+          <div class="strategy-card">
+            <div class="strategy-num">אסטרטגיה 01</div>
+            <div class="strategy-title">כניסה מוקדמת</div>
+            <div class="strategy-desc">הכנסת יועץ הירוק בשלב ה-Schematic Design (לא ה-DD) מצמצמת 40–60% מהעלות לעומת הכנסה מאוחרת. שינויים בשלב SD עולים פי 100 פחות משינויים בשלב הבנייה.</div>
+            <div class="strategy-saving">חיסכון פוטנציאלי: ₪30K–60K</div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">אסטרטגיה 02</div>
+            <div class="strategy-title">Energy Model מוקדם</div>
+            <div class="strategy-desc">סימולציית אנרגיה בשלבים מוקדמים מאפשרת לבחור כיוון חלונות ומערכת HVAC שממקסמת יעילות. זה מוזיל ממ"ס, מצמצם PV הנדרש, ועדיין עומד ביעדי EA credits.</div>
+            <div class="strategy-saving">חיסכון פוטנציאלי: ₪50K–120K</div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">אסטרטגיה 03</div>
+            <div class="strategy-title">חומרים מקומיים</div>
+            <div class="strategy-desc">20% מחומרי הבנייה ממרחק עד 800 ק"מ = 2 נקודות MR. בישראל: בלוקי בטון, לוחות גבס, פרופילי אלומיניום — כולם ייצור מקומי. לא נדרש שינוי בסייפ; רק תיעוד מקור.</div>
+            <div class="strategy-saving">חיסכון: 0 ₪ — נקודות חינם</div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">אסטרטגיה 04</div>
+            <div class="strategy-title">Regional Priority Credits</div>
+            <div class="strategy-desc">4 הנקודות הישראליות של Regional Priority (שימור מים) הן כמעט חינמיות לכל פרויקט בישראל, כי מים הם ממילא אתגר שכולם מתמודדים איתו. זה 4 נקודות בלי תוספת עלות.</div>
+            <div class="strategy-saving">חיסכון: 4 נקודות ₪0</div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">אסטרטגיה 05</div>
+            <div class="strategy-title">Preliminary Review</div>
+            <div class="strategy-desc">הגשת Design Preliminary Review (אופציונלי, כ-$1,000) לפני שלב הבנייה מגלה מוקדם אם קרדיטים "בסכנה". זה חוסך 3–6 חודשי עיכוב ואלפי דולרים של תיקונים מאוחרים.</div>
+            <div class="strategy-saving">חיסכון פוטנציאלי: ₪40K–100K</div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">אסטרטגיה 06</div>
+            <div class="strategy-title">Cx מוקדם</div>
+            <div class="strategy-desc">Fundamental Commissioning הוא חובה — מחירו נקבע מוקדם. Enhanced Cx מוסיף 6 נקודות. אם מבצעים Enhanced Cx בשלב DD (לא Construction), חוסכים 30–40% מהעלות.</div>
+            <div class="strategy-saving">חיסכון: ₪20K–50K</div>
+          </div>
+          <div class="strategy-card">
+            <div class="strategy-num">אסטרטגיה 07</div>
+            <div class="strategy-title">Credit Optimization</div>
+            <div class="strategy-desc">ניתוח מקצועי של "מפת נקודות" לפרויקט הספציפי חוסך מאמץ. יש קרדיטים שדורשים תוספת עלות גבוהה לנקודה אחת, ויש שנותנים 3–6 נקודות תמורת שינוי תהליכי בלבד. בחירה נכונה = פחות השקעה לאותו ציון.</div>
+            <div class="strategy-saving">חיסכון: 15–25% מסך עלות הייעוץ</div>
+          </div>
+        </div>
+
+        <div class="callout callout-green reveal">
+          <div class="callout-label">מקרה בוחן ישראלי</div>
+          <p>בניין משרדים בהרצליה פיתוח — 5,200 מ"ר, LEED Gold. השקענו 3 שעות בשלב SD בניתוח Credit Optimization. זיהינו 12 נקודות "בחינם" שלא דרשו שינויי תכנון — רק שינוי ספקים ותיעוד מסודר. <strong>עלות ייעוץ סופית: ₪88,000. ציון סופי: 64 נקודות Gold.</strong></p>
+        </div>
       </div>
-    </div>
+
+      <!-- CHAPTER 5 -->
+      <div class="guide-chapter" id="ch5">
+        <div class="guide-chapter-header reveal">
+          <div class="guide-chapter-num">05</div>
+          <div class="guide-chapter-title-wrap">
+            <div class="guide-chapter-label">פרק חמישי</div>
+            <h2 class="guide-chapter-title">משאבים, תקנים ואנשי קשר</h2>
+          </div>
+        </div>
+
+        <p class="guide-p reveal">רשימה זו מרכזת את הגופים, התקנים, והמשאבים המרכזיים לפרויקט בנייה ירוקה בישראל. היא עודכנה לינואר 2025.</p>
+
+        <h3 class="guide-h3 reveal">גופים בישראל</h3>
+        <div class="resource-grid reveal reveal-d1">
+          <div class="resource-card">
+            <div class="resource-org">ILGBC — Israel Green Building Council</div>
+            <div class="resource-type">גוף LEED ישראלי</div>
+            <div class="resource-desc">הנציגות הרשמית של USGBC בישראל. מאמן ומסמיך LEED AP, מארגן כנסים ומספק הכוון לרישום פרויקטים.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-org">מכון התקנים הישראלי (מת"י)</div>
+            <div class="resource-type">תקנים ישראליים</div>
+            <div class="resource-desc">מפרסם ת"י 5281, ת"י 1045 (בידוד תרמי), ת"י 2378 (שמש מים חמים). ניתן לרכוש תקנים ישירות באתר.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-org">משרד האנרגיה — אגף יעילות אנרגטית</div>
+            <div class="resource-type">רגולציה ותמריצים</div>
+            <div class="resource-desc">מפרסם מענקים ותמריצים לבנייה ירוקה, מנהל תוכנית "עוצמה ירוקה" לפאנלים סולאריים, ועדכוני רגולציה.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-org">משרד הבינוי והשיכון</div>
+            <div class="resource-type">בנייה ממשלתית</div>
+            <div class="resource-desc">מחייב ת"י 5281 בכל פרויקטי בנייה ממשלתיים. מנהל את "מסד" — מרכז פיתוח ידע לבנייה ירוקה.</div>
+          </div>
+        </div>
+
+        <h3 class="guide-h3 reveal">גופים בינלאומיים</h3>
+        <div class="resource-grid reveal reveal-d1">
+          <div class="resource-card">
+            <div class="resource-org">USGBC / GBCI</div>
+            <div class="resource-type">LEED</div>
+            <div class="resource-desc">usgbc.org — רישום פרויקטים, LEED Online, ספריית קרדיטים. GBCI מבצע את הבדיקות ומנפיק תעודות.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-org">BRE Global</div>
+            <div class="resource-type">BREEAM</div>
+            <div class="resource-desc">bregroup.com — רישום BREEAM, רשימת Assessors מוסמכים, ספריות BREEAM International New Construction.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-org">IWBI — International WELL Building Institute</div>
+            <div class="resource-type">WELL Standard</div>
+            <div class="resource-desc">wellcertified.com — הסמכה ל-WELL Building Standard, המתמקד בבריאות ורווחת דיירים.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-org">World Green Building Council</div>
+            <div class="resource-type">מחקר ומדיניות</div>
+            <div class="resource-desc">worldgbc.org — דוחות שוק, מחקרי ROI, ומדיניות גלובלית. מקור ל-"Business Case for Green Buildings".</div>
+          </div>
+        </div>
+
+        <h3 class="guide-h3 reveal">תקנים ישראליים מרכזיים</h3>
+        <ul class="credit-list reveal reveal-d1">
+          <li><span class="credit-name">ת"י 5281</span><span>בנייה בת קיימא — הדירוג הירוק הישראלי</span></li>
+          <li><span class="credit-name">ת"י 1045</span><span>בידוד תרמי של מבנים</span></li>
+          <li><span class="credit-name">ת"י 2378</span><span>מערכות לחימום מים על ידי אנרגיית שמש</span></li>
+          <li><span class="credit-name">תוספת 7</span><span>לתקנות התכנון והבנייה — יעילות אנרגטית</span></li>
+          <li><span class="credit-name">ת"י 1956</span><span>איכות אוויר פנימי במבנים</span></li>
+          <li><span class="credit-name">ת"י 5283</span><span>שימוש חוזר במים אפורים</span></li>
+        </ul>
+
+        <div class="callout callout-green reveal">
+          <div class="callout-label">רוצה ייעוץ אישי?</div>
+          <p>אם קראת עד כאן ויש לך פרויקט ספציפי — שמחאשמח לשמוע. כתוב לי ישירות ל-<a href="mailto:yuvalarc@gmail.com"><strong>yuvalarc@gmail.com</strong></a> עם תיאור קצר של הפרויקט, וכבר בשיחה הראשונה תקבל הערכה ראשונית של המסלול המתאים ועלות ייעוץ משוערת.</p>
+        </div>
+      </div>
+
+    </div><!-- /guide-container -->
   </section>
 
   <!-- TESTIMONIALS -->
@@ -504,7 +1009,7 @@
         </div>
         <div class="reveal reveal-d1" style="background:var(--canvas); border:1px solid var(--hairline); border-radius:20px; padding:32px;">
           <div style="font-size:32px; font-family:Georgia,serif; color:var(--primary); margin-bottom:12px;">"</div>
-          <p style="font-size:15px; color:var(--ink-muted); line-height:1.75; margin-bottom:24px;">סוף סוף מדריך שמדבר בשפה שלנו — לא אקדמי, לא מסובך. מעשי ומדויק.</p>
+          <p style="font-size:15px; color:var(--ink-muted); line-height:1.75; margin-bottom:24px;">סוף סוף מדריך שמדבר בשפה שלנו — לא אקדמי, לא מסובך. מעשי ומדויק. הפרק על עלויות לבדו שווה הכל.</p>
           <div style="font-size:14px; font-weight:700;">מיכל לוי</div>
           <div style="font-size:12px; color:var(--ink-subtle);">אדריכלית, משרד בוטיק ברמת גן</div>
         </div>
@@ -538,7 +1043,7 @@
         </div>
         <div class="reveal reveal-d3" style="border-bottom:1px solid var(--hairline); padding:24px 0;">
           <div style="font-size:17px; font-weight:700; margin-bottom:10px;">האם המדריך בחינם לחלוטין?</div>
-          <p style="font-size:15px; color:var(--ink-muted); line-height:1.7;">כן, ללא עלות ובלי שום דבר שנמכר בהמשך. רק תשאיר מייל ואשלח לך את הקובץ.</p>
+          <p style="font-size:15px; color:var(--ink-muted); line-height:1.7;">כן, ללא עלות ובלי שום דבר שנמכר בהמשך. רק תשאיר מייל ואשלח לך קישור ישיר לדף הזה לשמירה.</p>
         </div>
       </div>
     </div>
@@ -549,9 +1054,9 @@
     <div class="container">
       <p class="section-label reveal">בחינם, לגמרי</p>
       <h2 class="cta-title reveal reveal-d1">מוכן להתחיל?</h2>
-      <p class="cta-sub reveal reveal-d2">קבל את המדריך עכשיו — ישלח ישירות למייל תוך דקה</p>
+      <p class="cta-sub reveal reveal-d2">רוצה קישור לשמירה? שלח מייל ואני אשלח לך אותו</p>
       <a href="#get-guide" class="cta-btn reveal reveal-d3" onclick="document.getElementById('emailInput').focus()">
-        קבל את המדריך חינם ←
+        שלח לי את הקישור ←
       </a>
     </div>
   </section>
@@ -569,17 +1074,13 @@
   <script>
     // Scroll reveal
     const revealEls = document.querySelectorAll('.reveal');
-    new IntersectionObserver((entries) => {
+    const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 }).forEach ? (() => {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.12 });
-      revealEls.forEach(el => obs.observe(el));
-    })() : null;
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => obs.observe(el));
 
-    // Immediate reveal for hero
-    document.querySelectorAll('.hero-text > *, .hero .hero-badge').forEach(el => {
+    // Hero elements visible immediately
+    document.querySelectorAll('.hero .reveal, .hero-badge, .hero-text h1, .hero-text .hero-sub, .hero-text .hero-meta, .hero-text .hero-proof').forEach(el => {
       el.classList.add('visible');
     });
 
@@ -603,8 +1104,8 @@
           body: JSON.stringify({
             email,
             guideTitle: 'המדריך המלא לבנייה ירוקה בישראל 2025',
-            guideUrl: 'https://drive.google.com/file/d/GUIDE_FILE_ID/view',
-            guideDescription: 'כל מה שצריך לדעת על LEED, BREEAM ודירוג ירוק ישראלי — במדריך PDF חינמי.'
+            guideUrl: 'https://yuvalalimi.com/guides/bina-yeruka-101.html#guide-content',
+            guideDescription: 'כל מה שצריך לדעת על LEED, BREEAM ודירוג ירוק ישראלי — 5 פרקים מקצועיים, עלויות ריאליות, וצ\'קליסט מעשי.'
           })
         });
 
