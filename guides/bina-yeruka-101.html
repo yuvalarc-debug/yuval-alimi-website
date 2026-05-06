@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>המדריך המלא לבנייה ירוקה בישראל 2025 — יובל עלימי</title>
+  <meta name="description" content="כל מה שצריך לדעת על LEED, BREEAM, ודירוג ירוק ישראלי — במדריך PDF חינמי" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --canvas:    #050a05;
+      --surface-1: #0c130c;
+      --surface-2: #131c13;
+      --primary:   #52b788;
+      --primary-bright: #86efac;
+      --ink:       #e8f5ee;
+      --ink-muted: #8db5a0;
+      --ink-subtle:#4d6b5a;
+      --hairline:  #1e2d1e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Heebo', system-ui, sans-serif;
+      background: var(--canvas);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(5,10,5,0.9); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 16px; font-weight: 700;
+    }
+    .nav-logo-icon {
+      width: 34px; height: 34px; background: var(--primary);
+      border-radius: 9px; display: flex; align-items: center;
+      justify-content: center; font-size: 13px; font-weight: 800; color: var(--canvas);
+    }
+    .nav-cta {
+      padding: 9px 22px; background: var(--primary); color: var(--canvas);
+      border-radius: 100px; font-size: 13px; font-weight: 700;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--primary-bright); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 120px 48px 80px; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(82,183,136,0.07) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 20% 80%, rgba(45,106,79,0.1) 0%, transparent 60%);
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      nav { padding: 16px 24px; }
+      .hero { padding: 100px 24px 60px; }
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(82,183,136,0.1); border: 1px solid rgba(82,183,136,0.25);
+      border-radius: 100px; padding: 6px 16px; margin-bottom: 24px;
+      font-size: 13px; font-weight: 600; color: var(--primary);
+    }
+    .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--primary); }
+    h1 {
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 900; line-height: 1.05; letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+    h1 .accent { color: var(--primary); }
+    .hero-sub {
+      font-size: 18px; color: var(--ink-muted); line-height: 1.75;
+      margin-bottom: 16px; max-width: 540px;
+    }
+    .hero-meta {
+      font-size: 13px; color: var(--ink-subtle);
+      margin-bottom: 40px;
+    }
+    .hero-proof {
+      display: flex; align-items: center; gap: 16px; margin-top: 32px;
+    }
+    .avatars {
+      display: flex;
+    }
+    .avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--surface-2); border: 2px solid var(--canvas);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: var(--primary);
+      margin-left: -10px;
+    }
+    .proof-text { font-size: 13px; color: var(--ink-muted); }
+    .proof-text strong { color: var(--ink); }
+
+    /* FORM CARD */
+    .form-card {
+      background: var(--surface-1);
+      border: 1px solid var(--hairline);
+      border-radius: 24px;
+      padding: 40px;
+      position: sticky; top: 100px;
+    }
+    .form-card-title {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .form-card-sub {
+      font-size: 14px; color: var(--ink-muted); margin-bottom: 28px; line-height: 1.6;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-input {
+      width: 100%; background: var(--surface-2);
+      border: 1px solid var(--hairline); border-radius: 12px;
+      padding: 14px 16px; font-size: 15px; color: var(--ink);
+      font-family: inherit; direction: rtl; outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-input:focus { border-color: var(--primary); background: #1a231a; }
+    .form-input::placeholder { color: var(--ink-subtle); }
+    .form-submit {
+      width: 100%; padding: 16px;
+      background: var(--primary); color: var(--canvas);
+      border: none; border-radius: 100px;
+      font-size: 16px; font-weight: 800; font-family: inherit;
+      cursor: pointer; transition: background 0.2s, transform 0.1s;
+      margin-top: 4px;
+    }
+    .form-submit:hover { background: var(--primary-bright); transform: translateY(-1px); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .form-note {
+      font-size: 12px; color: var(--ink-subtle); text-align: center;
+      margin-top: 12px; line-height: 1.6;
+    }
+    .form-success {
+      display: none; text-align: center; padding: 16px;
+      background: rgba(82,183,136,0.1); border: 1px solid rgba(82,183,136,0.3);
+      border-radius: 12px; color: var(--primary); font-size: 15px; font-weight: 600;
+      margin-top: 12px;
+    }
+    .form-error {
+      display: none; text-align: center; padding: 12px;
+      background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 12px; color: #fca5a5; font-size: 14px;
+      margin-top: 12px;
+    }
+
+    /* WHAT YOU GET */
+    .section { padding: 96px 48px; }
+    @media (max-width: 768px) { .section { padding: 64px 24px; } }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(32px, 4vw, 56px); font-weight: 800;
+      letter-spacing: -1px; line-height: 1.1; margin-bottom: 20px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--ink-muted); max-width: 540px; line-height: 1.75;
+    }
+
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; background: var(--hairline);
+      border-radius: 20px; overflow: hidden; margin-top: 56px;
+    }
+    @media (max-width: 768px) { .benefits-grid { grid-template-columns: 1fr; } }
+    .benefit-card {
+      background: var(--surface-1); padding: 36px;
+      transition: background 0.2s;
+    }
+    .benefit-card:hover { background: var(--surface-2); }
+    .benefit-icon {
+      font-size: 32px; margin-bottom: 20px; display: block;
+    }
+    .benefit-title {
+      font-size: 18px; font-weight: 700; margin-bottom: 10px;
+    }
+    .benefit-desc {
+      font-size: 14px; color: var(--ink-muted); line-height: 1.7;
+    }
+
+    /* CHAPTERS */
+    .chapters-section {
+      background: var(--surface-1);
+      border-top: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .chapters-list { margin-top: 48px; }
+    .chapter {
+      display: flex; gap: 24px; padding: 24px 0;
+      border-bottom: 1px solid var(--hairline); align-items: start;
+    }
+    .chapter-num {
+      font-size: 40px; font-weight: 800; color: var(--hairline);
+      line-height: 1; min-width: 56px; letter-spacing: -2px;
+      transition: color 0.2s;
+    }
+    .chapter:hover .chapter-num { color: var(--primary); }
+    .chapter-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .chapter-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.6; }
+
+    /* ABOUT */
+    .about-section { padding: 96px 48px; }
+    @media (max-width: 768px) { .about-section { padding: 64px 24px; } }
+    .about-inner {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 48px; align-items: center; max-width: 800px;
+    }
+    @media (max-width: 600px) { .about-inner { grid-template-columns: 1fr; } }
+    .about-avatar {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: var(--surface-2); border: 2px solid var(--hairline);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; font-weight: 900; color: var(--primary);
+      flex-shrink: 0;
+    }
+    .about-name { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .about-role { font-size: 14px; color: var(--primary); font-weight: 600; margin-bottom: 16px; }
+    .about-bio { font-size: 15px; color: var(--ink-muted); line-height: 1.75; }
+
+    /* CTA BOTTOM */
+    .cta-section {
+      padding: 96px 48px;
+      background: var(--surface-1);
+      border-top: 1px solid var(--hairline);
+      text-align: center;
+    }
+    @media (max-width: 768px) { .cta-section { padding: 64px 24px; } }
+    .cta-title {
+      font-size: clamp(32px, 5vw, 64px); font-weight: 900;
+      letter-spacing: -1.5px; margin-bottom: 20px;
+    }
+    .cta-sub { font-size: 18px; color: var(--ink-muted); margin-bottom: 40px; }
+    .cta-btn {
+      display: inline-block; padding: 18px 48px;
+      background: var(--primary); color: var(--canvas);
+      border-radius: 100px; font-size: 18px; font-weight: 800;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { background: var(--primary-bright); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 48px;
+      border-top: 1px solid var(--hairline);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: var(--ink-subtle);
+    }
+    @media (max-width: 600px) { footer { flex-direction: column; gap: 16px; padding: 32px 24px; } }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/alimi-resn.html" class="nav-logo">
+      <span class="nav-logo-icon">YA</span>
+      יובל עלימי
+    </a>
+    <a href="#get-guide" class="nav-cta">קבל את המדריך</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-badge">מדריך PDF חינמי · 2025</div>
+        <h1>המדריך המלא<br/>לבנייה <span class="accent">ירוקה</span><br/>בישראל</h1>
+        <p class="hero-sub">LEED, BREEAM, ודירוג ירוק ישראלי — כל ההסמכות, כל המסלולים, כל הטיפים המעשיים. במדריך אחד.</p>
+        <p class="hero-meta">📄 32 עמודים · ⏱ קריאה של 20 דקות · 🆓 ללא עלות</p>
+        <div class="hero-proof">
+          <div class="avatars">
+            <div class="avatar">ד</div>
+            <div class="avatar">מ</div>
+            <div class="avatar">ר</div>
+            <div class="avatar">ע</div>
+          </div>
+          <p class="proof-text"><strong>+340 אדריכלים ויזמים</strong> כבר קיבלו את המדריך</p>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="form-card" id="get-guide">
+        <div class="form-card-title">קבל את המדריך עכשיו</div>
+        <div class="form-card-sub">רשום את המייל שלך ואשלח לך את הקובץ ישירות — ללא ספאם, ללא התחייבות.</div>
+        <form id="leadForm">
+          <div class="form-group">
+            <input type="text" id="nameInput" class="form-input" placeholder="השם שלך" required />
+          </div>
+          <div class="form-group">
+            <input type="email" id="emailInput" class="form-input" placeholder="המייל שלך" required />
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">
+            שלח לי את המדריך ←
+          </button>
+          <p class="form-note">📨 ישלח ישירות למייל תוך דקה · 🔒 הפרטים שמורים ולא יועברו לאף גורם</p>
+          <div class="form-success" id="successMsg">
+            ✅ נשלח! בדוק את תיבת הדואר שלך עוד רגע
+          </div>
+          <div class="form-error" id="errorMsg"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label reveal">מה תלמד</p>
+      <h2 class="section-title reveal reveal-d1">למה כדאי לך<br/>לקרוא את המדריך</h2>
+      <p class="section-sub reveal reveal-d2">מדריך פרקטי שנכתב מתוך ניסיון של מעל 47 פרויקטים מוסמכים בישראל ובחו"ל.</p>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <span class="benefit-icon">🏆</span>
+          <div class="benefit-title">מסלולי הסמכה</div>
+          <div class="benefit-desc">השוואה מלאה בין LEED, BREEAM, WELL, ודירוג ירוק ישראלי — ואיך לבחור את המסלול הנכון.</div>
+        </div>
+        <div class="benefit-card reveal reveal-d1">
+          <span class="benefit-icon">💰</span>
+          <div class="benefit-title">עלויות ריאליות</div>
+          <div class="benefit-desc">כמה עולה תהליך הסמכה? מה ה-ROI הצפוי? מספרים אמיתיים מפרויקטים שליוויתי.</div>
+        </div>
+        <div class="benefit-card reveal reveal-d2">
+          <span class="benefit-icon">⚡</span>
+          <div class="benefit-title">טעויות שכדאי להימנע</div>
+          <div class="benefit-desc">10 הטעויות הנפוצות שגורמות לפרויקטים להיכשל בהסמכה — ואיך להימנע מהן.</div>
+        </div>
+        <div class="benefit-card reveal reveal-d3">
+          <span class="benefit-icon">📋</span>
+          <div class="benefit-title">צ'קליסט מעשי</div>
+          <div class="benefit-desc">רשימת בדיקה לכל שלב בפרויקט — מהתכנון הראשוני ועד להגשת תיק ההסמכה.</div>
+        </div>
+        <div class="benefit-card reveal reveal-d4">
+          <span class="benefit-icon">🌿</span>
+          <div class="benefit-title">חומרים ירוקים</div>
+          <div class="benefit-desc">אילו חומרים תורמים לנקודות הסמכה ואיפה לרכוש אותם בישראל.</div>
+        </div>
+        <div class="benefit-card reveal reveal-d5">
+          <span class="benefit-icon">🔋</span>
+          <div class="benefit-title">יעילות אנרגטית</div>
+          <div class="benefit-desc">פתרונות מוכחים לחיסכון של 30-50% בצריכת האנרגיה — בתקציב סביר.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTERS -->
+  <section class="section chapters-section">
+    <div class="container">
+      <p class="section-label reveal">תוכן עניינים</p>
+      <h2 class="section-title reveal reveal-d1">מה יש בפנים?</h2>
+      <div class="chapters-list">
+        <div class="chapter reveal">
+          <div class="chapter-num">01</div>
+          <div>
+            <div class="chapter-title">מה זו בנייה ירוקה ולמה זה חשוב עכשיו</div>
+            <div class="chapter-desc">הרקע הרגולטורי, המגמות הגלובליות, ומה זה אומר על שוק הנדל"ן הישראלי</div>
+          </div>
+        </div>
+        <div class="chapter reveal reveal-d1">
+          <div class="chapter-num">02</div>
+          <div>
+            <div class="chapter-title">מפת מסלולי ההסמכה — LEED, BREEAM, דירוג ירוק</div>
+            <div class="chapter-desc">הבדלים מהותיים, עלויות, לוחות זמנים, ואיזה מסלול מתאים לסוג הפרויקט שלך</div>
+          </div>
+        </div>
+        <div class="chapter reveal reveal-d2">
+          <div class="chapter-num">03</div>
+          <div>
+            <div class="chapter-title">שלבי ההסמכה המלאים</div>
+            <div class="chapter-desc">מרגע ההחלטה ועד קבלת הלוחית — כל שלב, מי אחראי, ומה המסמכים הנדרשים</div>
+          </div>
+        </div>
+        <div class="chapter reveal reveal-d3">
+          <div class="chapter-num">04</div>
+          <div>
+            <div class="chapter-title">חיסכון בעלויות: 7 אסטרטגיות שעובדות</div>
+            <div class="chapter-desc">כיצד להגיע להסמכה מבלי לנפח את התקציב — כולל מקרי בוחן מישראל</div>
+          </div>
+        </div>
+        <div class="chapter reveal reveal-d4">
+          <div class="chapter-num">05</div>
+          <div>
+            <div class="chapter-title">משאבים, תקנים, ואנשי קשר</div>
+            <div class="chapter-desc">רשימה מקיפה של גופים, תקנים, וספקים רלוונטיים בישראל</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about-inner reveal">
+        <div class="about-avatar">י</div>
+        <div>
+          <div class="about-name">יובל עלימי</div>
+          <div class="about-role">יועץ בנייה ירוקה וקיימות · LEED AP BD+C</div>
+          <p class="about-bio">
+            מעל 12 שנות ניסיון בליווי יזמים, אדריכלים, וחברות נדל"ן בתהליכי הסמכה ירוקה.
+            47 מבנים מוסמכים ברחבי ישראל — משיכון בנות גוריון ועד מגדלי משרדים בגוש דן.
+            כתבתי את המדריך הזה כי ראיתי יותר מדי פרויקטים שנכשלו מסיבות שהיה אפשר למנוע.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BOTTOM -->
+  <section class="cta-section">
+    <div class="container">
+      <p class="section-label reveal">בחינם, לגמרי</p>
+      <h2 class="cta-title reveal reveal-d1">מוכן להתחיל?</h2>
+      <p class="cta-sub reveal reveal-d2">קבל את המדריך עכשיו — ישלח ישירות למייל תוך דקה</p>
+      <a href="#get-guide" class="cta-btn reveal reveal-d3" onclick="document.getElementById('emailInput').focus()">
+        קבל את המדריך חינם ←
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="/alimi-resn.html" style="display:flex; align-items:center; gap:10px;">
+      <span style="background:var(--primary); border-radius:8px; width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:var(--canvas);">YA</span>
+      <span>יובל עלימי</span>
+    </a>
+    <span>© 2025 יובל עלימי ייעוץ בנייה ירוקה</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 }).forEach ? (() => {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => obs.observe(el));
+    })() : null;
+
+    // Immediate reveal for hero
+    document.querySelectorAll('.hero-text > *, .hero .hero-badge').forEach(el => {
+      el.classList.add('visible');
+    });
+
+    // Form submit
+    document.getElementById('leadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const successMsg = document.getElementById('successMsg');
+      const errorMsg = document.getElementById('errorMsg');
+      const email = document.getElementById('emailInput').value;
+
+      btn.disabled = true;
+      btn.textContent = 'שולח...';
+      successMsg.style.display = 'none';
+      errorMsg.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            guideTitle: 'המדריך המלא לבנייה ירוקה בישראל 2025',
+            guideUrl: 'https://drive.google.com/file/d/GUIDE_FILE_ID/view',
+            guideDescription: 'כל מה שצריך לדעת על LEED, BREEAM ודירוג ירוק ישראלי — במדריך PDF חינמי.'
+          })
+        });
+
+        if (res.ok) {
+          successMsg.style.display = 'block';
+          e.target.reset();
+        } else {
+          const data = await res.json();
+          errorMsg.textContent = data.error || 'שגיאה, נסה שוב';
+          errorMsg.style.display = 'block';
+        }
+      } catch {
+        errorMsg.textContent = 'שגיאת חיבור, נסה שוב';
+        errorMsg.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'שלח לי את המדריך ←';
+      }
+    });
+  </script>
+</body>
+</html>
