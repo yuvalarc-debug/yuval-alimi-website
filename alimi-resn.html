@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>אלימי אדריכלים · תכנון ירוק ובניה בת קיימא</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@200;300;400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050d07;
+  --bg2:#081209;
+  --green:#00e87a;
+  --green2:#4ade80;
+  --green-dim:rgba(0,232,122,0.12);
+  --white:#f2f5f2;
+  --muted:rgba(242,245,242,0.38);
+  --border:rgba(0,232,122,0.14);
+  --font:"Heebo",sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:auto;font-size:16px;}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--font);
+  direction:rtl;
+  overflow-x:hidden;
+  cursor:none;
+}
+a{color:inherit;text-decoration:none;cursor:none;}
+
+/* ── NOISE CANVAS ── */
+#noise{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:9999;opacity:.04;
+}
+
+/* ── CURSOR ── */
+#cur{
+  position:fixed;width:8px;height:8px;background:var(--green);
+  border-radius:50%;pointer-events:none;z-index:10000;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s,opacity .2s;
+  mix-blend-mode:exclusion;
+}
+#cur-ring{
+  position:fixed;width:36px;height:36px;
+  border:1px solid rgba(0,232,122,0.55);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .35s cubic-bezier(.23,1,.32,1),height .35s cubic-bezier(.23,1,.32,1),border-color .3s;
+}
+body.hovering #cur{width:4px;height:4px;}
+body.hovering #cur-ring{width:56px;height:56px;border-color:var(--green);}
+body.clicking #cur{transform:translate(-50%,-50%) scale(.6);}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;right:0;left:0;z-index:900;
+  padding:28px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  mix-blend-mode:normal;
+}
+.nav-logo{
+  font-weight:900;font-size:15px;letter-spacing:2px;
+  color:var(--white);text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;
+}
+.nav-logo-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--green);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.7);}}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{
+  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);font-weight:600;
+  transition:color .3s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;right:0;width:0;height:1px;
+  background:var(--green);transition:width .3s;
+}
+.nav-links a:hover{color:var(--white);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{
+  background:transparent;border:1px solid var(--border);
+  color:var(--green);font-family:var(--font);font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;font-weight:700;
+  padding:10px 20px;border-radius:100px;
+  transition:background .3s,color .3s,border-color .3s;cursor:none;
+}
+.nav-cta:hover{background:var(--green);color:var(--bg);}
+
+/* ── SECTIONS ── */
+section{
+  min-height:100vh;width:100%;position:relative;
+  display:flex;flex-direction:column;justify-content:center;
+  overflow:hidden;
+}
+
+/* ── HERO ── */
+#hero{
+  background:var(--bg);
+  padding:0 48px;
+  align-items:flex-start;
+  justify-content:flex-end;
+  padding-bottom:12vh;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('https://source.unsplash.com/m_HRfLhgABo/1920x1080');
+  background-size:cover;background-position:center;background-attachment:fixed;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(5,13,7,0.88) 0%,rgba(5,13,7,0.65) 50%,rgba(5,13,7,0.80) 100%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,232,122,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,232,122,0.04) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 80%);
+}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--green);font-weight:700;
+  margin-bottom:28px;opacity:0;
+  transform:translateY(20px);
+  transition:opacity .8s .2s,transform .8s .2s;
+}
+.hero-title{
+  font-size:clamp(64px,10vw,160px);
+  font-weight:900;line-height:.88;
+  letter-spacing:-4px;
+  color:var(--white);
+  position:relative;z-index:1;
+}
+.hero-title .line{
+  display:block;overflow:hidden;
+}
+.hero-title .word{
+  display:inline-block;
+  transform:translateY(110%);opacity:0;
+  transition:transform 1s cubic-bezier(.16,1,.3,1),opacity .6s;
+}
+.hero-title .accent{color:var(--green);}
+.hero-mark{
+  color:var(--bg);
+  background:var(--green);
+  padding:0 10px 4px;
+  border-radius:6px;
+  display:inline-block;
+  line-height:1;
+}
+.hero-sub{
+  font-size:16px;font-weight:300;color:var(--muted);
+  max-width:500px;line-height:1.8;
+  margin-top:32px;
+  opacity:0;transform:translateY(24px);
+  transition:opacity .8s .9s,transform .8s .9s;
+}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeIn .8s 1.8s forwards;
+}
+.hero-scroll-line{
+  width:1px;height:60px;
+  background:linear-gradient(to bottom,transparent,var(--green),transparent);
+  animation:scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%{transform:scaleY(0);transform-origin:top;}
+  50%{transform:scaleY(1);transform-origin:top;}
+  50.01%{transform:scaleY(1);transform-origin:bottom;}
+  100%{transform:scaleY(0);transform-origin:bottom;}
+}
+.hero-scroll-label{
+  font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted);font-weight:600;
+}
+.hero-year{
+  position:absolute;top:50%;left:48px;transform:translateY(-50%);
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(0,232,122,0.35);font-weight:700;
+  writing-mode:vertical-rl;
+  opacity:0;animation:fadeIn 1s 1.5s forwards;
+}
+
+/* ── MARQUEE ── */
+#marquee{
+  min-height:auto;padding:32px 0;
+  background:var(--green);
+  overflow:hidden;
+}
+.marquee-track{
+  display:flex;gap:0;white-space:nowrap;
+  animation:marqueeAnim 18s linear infinite;
+}
+.marquee-item{
+  font-size:13px;font-weight:900;letter-spacing:2px;
+  text-transform:uppercase;color:var(--bg);
+  padding:0 40px;flex-shrink:0;
+}
+.marquee-sep{color:rgba(5,13,7,0.35);margin:0 -20px;}
+@keyframes marqueeAnim{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── MANIFESTO ── */
+#manifesto{
+  padding:120px 48px;
+  background-image:url('https://source.unsplash.com/5QgIuuBxKwM/1920x1080');
+  background-size:cover;background-position:center;background-attachment:fixed;
+  position:relative;
+}
+#manifesto::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(5,13,7,0.82);
+  z-index:0;
+}
+#manifesto > *{position:relative;z-index:1;}
+#manifesto{padding:120px 48px;
+  background:var(--bg);
+  justify-content:center;
+}
+.manifesto-label{
+  font-size:9px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--green);font-weight:700;margin-bottom:64px;
+}
+.manifesto-big{
+  font-size:clamp(36px,5.5vw,88px);
+  font-weight:900;line-height:1.04;
+  letter-spacing:-2px;
+  max-width:1000px;
+}
+.manifesto-big .reveal-line{
+  display:block;overflow:hidden;
+}
+.manifesto-big .reveal-word{
+  display:inline-block;
+  transform:translateY(100%);
+  transition:transform 1s cubic-bezier(.16,1,.3,1);
+}
+.manifesto-big .highlight{
+  color:var(--green);position:relative;
+}
+.manifesto-body{
+  max-width:500px;margin-top:64px;
+  font-size:15px;font-weight:300;color:var(--muted);
+  line-height:1.9;
+  opacity:0;transform:translateY(30px);
+  transition:opacity .8s,transform .8s;
+}
+
+/* ── SERVICES ── */
+#services{
+  padding:120px 48px;
+  background:var(--bg2);
+  min-height:auto;
+}
+.section-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:80px;
+}
+.section-label{
+  font-size:9px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--green);font-weight:700;
+}
+.section-count{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);font-weight:600;
+}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  border:1px solid var(--border);border-radius:2px;overflow:hidden;
+}
+.service-card{
+  padding:48px 36px;background:var(--bg2);
+  border-left:1px solid var(--border);
+  position:relative;overflow:hidden;cursor:none;
+  transition:background .4s;
+}
+.service-card:not(.service-card--ai):nth-child(3n+1){border-left:none;}
+.service-card--ai{border-left:none;}
+.service-card::before{
+  content:'';position:absolute;inset:0;
+  background:var(--green-dim);
+  transform:translateY(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.service-card:hover::before{transform:translateY(0);}
+.service-card:hover .service-num{color:var(--green);}
+.service-num{
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  color:rgba(0,232,122,0.25);margin-bottom:28px;
+  transition:color .3s;position:relative;z-index:1;
+}
+.service-icon{
+  font-size:32px;margin-bottom:20px;position:relative;z-index:1;
+  display:block;
+}
+.service-title{
+  font-size:20px;font-weight:800;margin-bottom:14px;
+  line-height:1.2;position:relative;z-index:1;
+}
+.service-desc{
+  font-size:12.5px;font-weight:300;color:var(--muted);
+  line-height:1.8;position:relative;z-index:1;
+}
+.service-tags{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;
+  position:relative;z-index:1;
+}
+/* AI featured card */
+.service-card--ai{
+  grid-column:span 3;
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  align-items:center;
+  background:rgba(0,232,122,0.05) !important;
+  border:1px solid rgba(0,232,122,0.3) !important;
+  box-shadow:0 0 60px rgba(0,232,122,0.07),inset 0 0 40px rgba(0,232,122,0.03);
+}
+.service-card--ai::before{
+  background:rgba(0,232,122,0.08) !important;
+}
+.service-card--ai .service-num{color:var(--green) !important;opacity:1;}
+.service-card--ai .service-icon{font-size:72px;}
+.service-card--ai .service-title{
+  font-size:clamp(28px,3vw,44px) !important;
+  letter-spacing:-2px;color:var(--green) !important;
+}
+.service-card--ai .ai-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;
+  color:var(--bg);background:var(--green);
+  padding:6px 14px;border-radius:100px;margin-bottom:16px;
+}
+.service-card--ai .service-desc{font-size:14px !important;color:rgba(242,245,242,0.7) !important;}
+.service-card--ai .ai-tools{
+  display:flex;flex-direction:column;gap:12px;margin-top:24px;
+}
+.service-card--ai .ai-tool-row{
+  display:flex;align-items:center;gap:12px;
+  font-size:13px;font-weight:600;color:var(--white);
+  padding:12px 16px;
+  border:1px solid rgba(0,232,122,0.2);border-radius:4px;
+  background:rgba(0,232,122,0.04);
+  transition:border-color .3s,background .3s;position:relative;z-index:1;
+}
+.service-card--ai .ai-tool-row:hover{border-color:var(--green);background:rgba(0,232,122,0.1);}
+.service-card--ai .ai-tool-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.service-card--ai .ai-tool-sub{font-size:11px;font-weight:300;color:var(--muted);margin-right:auto;}
+
+.service-tag{
+  font-size:9px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--green);
+  border:1px solid var(--border);padding:3px 8px;border-radius:100px;
+}
+
+/* ── NUMBERS ── */
+#numbers{
+  padding:120px 48px;
+  background-image:url('https://source.unsplash.com/UYc7h1qX8j0/1920x600');
+  background-size:cover;background-position:center top;
+  position:relative;
+}
+#numbers::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(5,13,7,0.88);z-index:0;
+}
+#numbers > *{position:relative;z-index:1;}
+#numbers{padding:120px 48px;
+  background:var(--bg);
+  min-height:auto;
+}
+.numbers-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:60px 0;
+  margin-top:60px;
+}
+.number-item{padding:0 40px;border-left:1px solid var(--border);}
+.number-item:first-child{border-left:none;padding-right:0;}
+.number-item:last-child{padding-left:0;}
+.number-big{
+  font-size:clamp(52px,6vw,96px);font-weight:900;
+  letter-spacing:-3px;line-height:1;
+  color:var(--green);margin-bottom:12px;
+}
+.number-label{
+  font-size:12px;font-weight:300;color:var(--muted);line-height:1.6;
+}
+
+/* ── ABOUT ── */
+#about{
+  padding:120px 48px;
+  background:var(--bg2);
+}
+.about-grid{
+  display:grid;grid-template-columns:180px 1fr;gap:56px;align-items:start;
+}
+.about-photo-col{
+  display:flex;flex-direction:column;gap:16px;
+}
+.about-avatar{
+  width:100%;aspect-ratio:4/5;
+  border-radius:6px;overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.about-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.about-title{
+  font-size:clamp(44px,5.5vw,88px);font-weight:900;
+  letter-spacing:-3px;line-height:.96;margin-bottom:0;
+}
+.about-title em{
+  display:block;font-style:normal;color:var(--green);
+}
+.about-body{
+  font-size:15px;font-weight:300;color:var(--muted);
+  line-height:1.95;margin-bottom:28px;margin-top:32px;
+}
+.about-body+.about-body{margin-top:0;}
+.about-creds{
+  display:flex;flex-direction:column;gap:14px;margin-top:40px;
+}
+.about-cred{
+  display:flex;align-items:center;gap:14px;
+  font-size:12px;font-weight:600;color:var(--muted);
+  letter-spacing:.5px;
+}
+.about-cred-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;
+}
+.about-stat{
+  display:flex;align-items:baseline;gap:10px;
+  margin-top:40px;padding-top:32px;
+  border-top:1px solid var(--border);
+}
+.about-stat-num{
+  font-size:40px;font-weight:900;letter-spacing:-2px;
+  color:var(--green);line-height:1;
+}
+.about-stat-lbl{
+  font-size:10px;font-weight:600;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;
+}
+
+/* ── AI SECTION ── */
+#ai{
+  padding:120px 48px;
+  background:var(--bg);
+  position:relative;
+  overflow:hidden;
+}
+.ai-bg-glow{
+  position:absolute;top:-200px;left:50%;transform:translateX(-50%);
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(0,232,122,0.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+.ai-header{
+  text-align:center;margin-bottom:80px;
+  position:relative;z-index:1;
+}
+.ai-title{
+  font-size:clamp(36px,5vw,80px);font-weight:900;
+  letter-spacing:-2px;line-height:1;
+}
+.ai-equation{
+  font-size:clamp(28px,4vw,64px);font-weight:900;
+  margin-top:16px;letter-spacing:-1px;
+}
+.ai-eq-accent{color:var(--green);}
+.ai-sub{
+  font-size:15px;font-weight:300;color:var(--muted);
+  margin-top:24px;max-width:600px;margin-left:auto;margin-right:auto;
+  line-height:1.8;
+}
+.ai-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
+  position:relative;z-index:1;
+}
+.ai-card{
+  background:rgba(0,232,122,0.04);
+  border:1px solid var(--border);border-radius:12px;
+  padding:28px 20px;cursor:none;
+  transition:background .3s,border-color .3s,transform .3s;
+  position:relative;overflow:hidden;
+}
+.ai-card::before{
+  content:'';position:absolute;top:0;right:0;
+  width:40px;height:40px;
+  background:radial-gradient(circle,var(--green) 0%,transparent 70%);
+  opacity:0;transition:opacity .3s;
+}
+.ai-card:hover{
+  background:rgba(0,232,122,0.08);
+  border-color:rgba(0,232,122,0.4);
+  transform:translateY(-4px);
+}
+.ai-card:hover::before{opacity:.3;}
+.ai-card-num{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  color:rgba(0,232,122,0.4);margin-bottom:16px;
+}
+.ai-card-title{font-size:13px;font-weight:800;margin-bottom:8px;line-height:1.3;}
+.ai-card-body{font-size:11px;font-weight:300;color:var(--muted);line-height:1.7;}
+
+/* ── APPROACH ── */
+#approach{
+  padding:120px 48px;
+  background-image:url('https://source.unsplash.com/0aRycsfH57A/1920x1080');
+  background-size:cover;background-position:center;
+  min-height:auto;position:relative;
+}
+#approach::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(5,13,7,0.90);z-index:0;
+}
+#approach > *{position:relative;z-index:1;}
+.approach-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin-top:60px;
+}
+.approach-step{
+  padding:40px 36px;
+  border-left:1px solid var(--border);
+  position:relative;
+}
+.approach-step:first-child{border-left:none;}
+.step-num{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--green);font-weight:700;margin-bottom:20px;
+}
+.step-title{font-size:18px;font-weight:800;margin-bottom:12px;line-height:1.2;}
+.step-body{font-size:12px;font-weight:300;color:var(--muted);line-height:1.8;}
+.step-bar{
+  position:absolute;bottom:0;right:0;left:0;
+  height:2px;background:var(--green-dim);overflow:hidden;
+}
+.step-bar-fill{
+  height:100%;background:var(--green);width:0%;
+  transition:width 1.2s cubic-bezier(.16,1,.3,1);
+}
+
+/* ── CLIENTS ── */
+#clients{
+  padding:80px 48px;
+  background:var(--bg);
+  min-height:auto;
+  border-top:1px solid var(--border);
+}
+.clients-label{
+  font-size:9px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:40px;text-align:center;
+}
+.clients-logos{
+  display:flex;justify-content:center;align-items:center;
+  flex-wrap:wrap;gap:48px;
+}
+.client-logo{
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(242,245,242,0.18);
+  transition:color .3s;cursor:none;
+}
+.client-logo:hover{color:rgba(242,245,242,0.55);}
+
+/* ── CONTACT ── */
+#contact{
+  padding:120px 48px;
+  background:var(--bg);
+  min-height:100vh;
+  justify-content:center;
+}
+.contact-inner{
+  max-width:900px;margin:0 auto;text-align:center;
+}
+.contact-pre{
+  font-size:9px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--green);font-weight:700;margin-bottom:40px;
+}
+.contact-title{
+  font-size:clamp(48px,8vw,120px);font-weight:900;
+  letter-spacing:-4px;line-height:.9;margin-bottom:56px;
+}
+.contact-title .g{color:var(--green);}
+.contact-email{
+  font-size:clamp(16px,2.5vw,32px);font-weight:300;
+  color:var(--muted);letter-spacing:1px;
+  border-bottom:1px solid var(--border);padding-bottom:32px;
+  margin-bottom:32px;transition:color .3s;
+  display:block;
+}
+.contact-email:hover{color:var(--white);}
+.contact-info{
+  display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+  margin-top:32px;
+}
+.contact-item{
+  font-size:13px;font-weight:300;color:var(--muted);
+  display:flex;align-items:center;gap:10px;
+}
+.contact-item-icon{
+  width:28px;height:28px;border-radius:8px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;flex-shrink:0;
+}
+.big-cta{
+  display:inline-flex;align-items:center;gap:14px;
+  margin-top:56px;
+  background:var(--green);color:var(--bg);
+  font-family:var(--font);font-size:13px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:18px 40px;border-radius:100px;border:none;cursor:none;
+  transition:transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.big-cta::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,0.15);
+  transform:translateX(100%);transition:transform .4s;
+}
+.big-cta:hover::before{transform:translateX(-100%);}
+.big-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 20px 60px rgba(0,232,122,0.3);
+}
+
+/* ── FOOTER ── */
+footer{
+  padding:32px 48px;
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-left{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);font-weight:600;
+}
+.footer-right{
+  font-size:10px;letter-spacing:1px;
+  color:rgba(0,232,122,0.4);font-weight:600;
+}
+
+/* ── SCROLL REVEAL ── */
+.sr{opacity:0;transform:translateY(40px);transition:opacity .9s,transform .9s cubic-bezier(.16,1,.3,1);}
+.sr.visible{opacity:1;transform:translateY(0);}
+.sr-delay-1{transition-delay:.1s;}
+.sr-delay-2{transition-delay:.2s;}
+.sr-delay-3{transition-delay:.3s;}
+.sr-delay-4{transition-delay:.4s;}
+
+/* ── SOUND BTN ── */
+#soundBtn{
+  position:fixed;bottom:32px;left:48px;z-index:800;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(5,13,7,0.8);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;
+  backdrop-filter:blur(20px);
+  transition:background .3s,border-color .3s;
+}
+#soundBtn:hover{background:rgba(0,232,122,0.1);border-color:var(--green);}
+.sound-bars{
+  display:flex;align-items:flex-end;gap:2.5px;height:16px;
+}
+.sound-bar{
+  width:2.5px;background:var(--green);border-radius:2px;
+  transition:height .1s;
+}
+#soundBtn.off .sound-bar{height:2px !important;}
+
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* responsive */
+@media(max-width:900px){
+  nav{padding:20px 24px;}
+  .nav-links{display:none;}
+  section{padding-left:24px !important;padding-right:24px !important;}
+  .services-grid,.ai-grid,.approach-steps{grid-template-columns:1fr 1fr;}
+  .about-grid,.numbers-grid{grid-template-columns:1fr;}
+  .number-item{border-left:none;border-top:1px solid var(--border);padding:24px 0;}
+  .hero-title{font-size:clamp(52px,12vw,120px);}
+}
+@media(max-width:540px){
+  .services-grid,.ai-grid,.approach-steps{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NOISE ═══ -->
+<canvas id="noise"></canvas>
+
+<!-- ═══ CURSOR ═══ -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- ═══ SOUND BTN ═══ -->
+<button id="soundBtn" class="off" aria-label="nature sounds" title="קולות טבע">
+  <div class="sound-bars">
+    <div class="sound-bar" style="height:6px"></div>
+    <div class="sound-bar" style="height:12px"></div>
+    <div class="sound-bar" style="height:8px"></div>
+    <div class="sound-bar" style="height:14px"></div>
+    <div class="sound-bar" style="height:5px"></div>
+  </div>
+</button>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    אלימי אדריכלות
+  </div>
+  <ul class="nav-links">
+    <li><a href="services/index.html">שירותים</a></li>
+    <li><a href="projects/index.html">פרויקטים</a></li>
+    <li><a href="#about">אודות</a></li>
+    <li><a href="#ai">AI + ירוק</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta magnetic">ייעוץ חינם</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-year">est. 2003</div>
+
+  <div class="hero-eyebrow" id="heroEyebrow">
+    ייעוץ בניה ירוקה · תכנון בר קיימא · AI
+  </div>
+
+  <h1 class="hero-title">
+    <span class="line"><span class="word" id="hw1">אלימי</span></span>
+    <span class="line" style="overflow:hidden;">
+      <span class="word" id="hw2" style="display:inline-flex;align-items:flex-end;gap:28px;">
+        <span style="color:var(--green);">אדריכלות</span>
+        <span style="font-size:.52em;color:var(--white);font-weight:900;letter-spacing:-2px;padding-bottom:.12em;">שעובדת עם הטבע</span>
+      </span>
+    </span>
+  </h1>
+
+  <p class="hero-sub" id="heroSub">
+    מגיבוש הרעיון הראשון ועד העץ בגינה — ייעוץ מקצועי לתכנון ירוק, הסמכות LEED ו-BREEAM, ובניה בת קיימא בשילוב כלי AI מתקדמים.
+  </p>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-label">גלול</span>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<section id="marquee">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">בניה ירוקה</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">LEED Platinum</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">BREEAM Outstanding</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">דירוג ירוק ישראלי</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">AI לאדריכלות</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">בניה בת קיימא</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">תכנון אנרגטי</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">חשיבה עתידית</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">בניה ירוקה</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">LEED Platinum</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">BREEAM Outstanding</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">דירוג ירוק ישראלי</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">AI לאדריכלות</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">בניה בת קיימא</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">תכנון אנרגטי</span><span class="marquee-sep">·</span>
+    <span class="marquee-item">חשיבה עתידית</span><span class="marquee-sep">·</span>
+  </div>
+</section>
+
+<!-- ═══ MANIFESTO ═══ -->
+<section id="manifesto">
+  <div class="manifesto-label sr">מניפסט</div>
+  <div class="manifesto-big" id="manifestoBig">
+    <span class="reveal-line"><span class="reveal-word">חשיבה</span></span>
+    <span class="reveal-line"><span class="reveal-word highlight" style="color:var(--green)">עתידית</span></span>
+    <span class="reveal-line"><span class="reveal-word">ירוקה</span></span>
+  </div>
+  <p class="manifesto-body sr sr-delay-2" id="manifestoBody">
+    אנחנו מאמינים שאדריכלות דנה בדיאלוג שבין האדם לסביבה. יצירה אדריכלית נמדדת ביכולתה לעמוד בציר הזמן — לבנות בנינים שמכבדים את הטבע, חוסכים אנרגיה, ומשפרים את איכות החיים של מי שחי ועובד בתוכם. בשילוב כלי AI מתקדמים, אנו מביאים דיוק שלא היה אפשרי בעבר.
+  </p>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="section-header sr">
+    <div class="section-label">שירותים</div>
+    <div class="section-count">06 תחומי התמחות</div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card magnetic sr">
+      <div class="service-num">01</div>
+      <span class="service-icon">🌿</span>
+      <div class="service-title">תכנון ירוק מקיף</div>
+      <div class="service-desc">ליווי מלא מגיבוש הפרוגרמה התכנונית ועד שלב סיום הפרויקט. תכנון מושכל עם דגש על אוורור טבעי, הצללה, ובידוד תרמי אופטימלי.</div>
+      <div class="service-tags"><span class="service-tag">פרטי</span><span class="service-tag">מסחרי</span><span class="service-tag">ציבורי</span></div>
+    </div>
+    <div class="service-card magnetic sr sr-delay-1">
+      <div class="service-num">02</div>
+      <span class="service-icon">🏆</span>
+      <div class="service-title">הסמכת LEED ו-BREEAM</div>
+      <div class="service-desc">ייעוץ וליווי בתהליך קבלת הסמכות LEED BD+C, LEED O+M ו-BREEAM New Construction. ניסיון עם פרויקטים שקיבלו Gold ו-Platinum.</div>
+      <div class="service-tags"><span class="service-tag">LEED</span><span class="service-tag">BREEAM</span><span class="service-tag">ירוק ישראלי</span></div>
+    </div>
+    <div class="service-card magnetic sr sr-delay-2">
+      <div class="service-num">03</div>
+      <span class="service-icon">⚡</span>
+      <div class="service-title">מודלינג אנרגטי</div>
+      <div class="service-desc">סימולציות אנרגיה מתקדמות לניבוי צריכת אנרגיה, ניתוח תאורה טבעית, וכיוון המבנה — כולל מודלינג AI לאלף תרחישים בשניות.</div>
+      <div class="service-tags"><span class="service-tag">סימולציה</span><span class="service-tag">ROI</span></div>
+    </div>
+    <div class="service-card magnetic sr">
+      <div class="service-num">04</div>
+      <span class="service-icon">🏗️</span>
+      <div class="service-title">ניהול פרויקטים</div>
+      <div class="service-desc">ניהול משולב של פרויקטים בשילוב תכנון אדריכלי ועיצוב פנים. מעקב ובקרה לאורך כל שלבי הפרויקט תוך חיסכון במשאבים.</div>
+      <div class="service-tags"><span class="service-tag">בנייה</span><span class="service-tag">שיפוץ</span></div>
+    </div>
+    <div class="service-card service-card--ai magnetic sr sr-delay-1" style="background-image:url('https://source.unsplash.com/Hcfwew744z4/1200x600');background-size:cover;background-position:center;background-blend-mode:overlay;">
+      <div>
+        <div class="service-num">05</div>
+        <span class="ai-badge">✦ יתרון תחרותי</span>
+        <span class="service-icon">🤖</span>
+        <div class="service-title">AI לתכנון ירוק</div>
+        <div class="service-desc">שילוב כלי בינה מלאכותית מתקדמים בכל שלבי התכנון — מניתוח אקלים מקומי ועד ניקוד אוטומטי לפי ת"י 5281. מה שלקח שבועות לקחת עכשיו שעות.</div>
+        <div class="service-tags" style="margin-top:20px;">
+          <span class="service-tag">Claude AI</span>
+          <span class="service-tag">ת"י 5281</span>
+          <span class="service-tag">Energy Modeling</span>
+          <span class="service-tag">BIM + AI</span>
+        </div>
+      </div>
+      <div class="ai-tools">
+        <div class="ai-tool-row">
+          <span class="ai-tool-dot"></span>
+          <span>ניתוח אנרגטי אוטומטי</span>
+          <span class="ai-tool-sub">סימולציות בשניות</span>
+        </div>
+        <div class="ai-tool-row">
+          <span class="ai-tool-dot"></span>
+          <span>בחירת חומרים אופטימלית</span>
+          <span class="ai-tool-sub">ROI מחושב</span>
+        </div>
+        <div class="ai-tool-row">
+          <span class="ai-tool-dot"></span>
+          <span>ניקוד LEED / BREEAM אוטומטי</span>
+          <span class="ai-tool-sub">דיוק מקסימלי</span>
+        </div>
+        <div class="ai-tool-row">
+          <span class="ai-tool-dot"></span>
+          <span>ניתוח אקלים וכיווניות</span>
+          <span class="ai-tool-sub">מותאם לפרויקט</span>
+        </div>
+      </div>
+    </div>
+    <div class="service-card magnetic sr sr-delay-2">
+      <div class="service-num">06</div>
+      <span class="service-icon">📚</span>
+      <div class="service-title">חינוך ולמידה</div>
+      <div class="service-desc">הרצאות וסדנאות לאדריכלים, קבלנים, ויזמים. הכשרה מעמיקה בבניה ירוקה, קיימות, ושילוב AI בתכנון אדריכלי.</div>
+      <div class="service-tags"><span class="service-tag">תל-חי</span><span class="service-tag">סדנאות</span></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:60px;">
+    <a href="services/index.html" class="big-cta magnetic sr" style="font-size:13px;padding:18px 48px;">
+      כל השירותים ←
+    </a>
+  </div>
+</section>
+
+<!-- ═══ NUMBERS ═══ -->
+<section id="numbers">
+  <div class="section-label sr">במספרים</div>
+  <div class="numbers-grid">
+    <div class="number-item sr">
+      <div class="number-big" data-count="20">0</div>
+      <div class="number-label">שנות ניסיון<br>בבניה ירוקה</div>
+    </div>
+    <div class="number-item sr sr-delay-1">
+      <div class="number-big" data-count="120">0</div>
+      <div class="number-label">פרויקטים<br>הושלמו</div>
+    </div>
+    <div class="number-item sr sr-delay-2">
+      <div class="number-big" data-count="40">0</div>
+      <div class="number-label">אחוז חיסכון<br>אנרגטי ממוצע</div>
+    </div>
+    <div class="number-item sr sr-delay-3">
+      <div class="number-big" data-count="3">0</div>
+      <div class="number-label">הסמכות בינלאומיות<br>LEED · BREEAM · ירוק ישראלי</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-grid">
+    <!-- עמודה ימין: לייבל + תמונה קטנה -->
+    <div class="about-photo-col sr">
+      <div class="section-label" style="margin-bottom:16px;">אודות</div>
+      <div class="about-avatar">
+        <img src="C:\Users\Admin\projects\sustainability\profile_nature.png" alt="יובל אלימי" onerror="this.src='C:\Users\Admin\projects\sustainability\profile_photo_clean.png';this.onerror=null;">
+      </div>
+    </div>
+    <!-- עמודה שמאל: כותרת + תוכן -->
+    <div class="about-left">
+      <h2 class="about-title sr">
+        יובל אלימי<br>
+        <em>אדריכל ירוק</em>
+      </h2>
+      <p class="about-body sr sr-delay-1">
+        אדריכל ויועץ מוסמך לתכנון אקולוגי ולבניה ירוקה. בעל תואר B-ARCH מ-CCNY, ניו-יורק (2002). מרצה בכיר במגמת אדריכלות ועיצוב פנים במכללת תל-חי.
+      </p>
+      <p class="about-body sr sr-delay-2">
+        מאז 2003, המשרד ליווה מאות פרויקטים במגזר הפרטי, הציבורי והמסחרי — תוך שמירה על עקרונות חשיבה ירוקה עתידית בכל פרויקט. חבר בעמותה ישראלית לייזום בנייה ירוקה ובת קיימא.
+      </p>
+      <div class="about-creds sr sr-delay-3">
+        <div class="about-cred"><div class="about-cred-dot"></div>B-ARCH · CCNY New York 2002</div>
+        <div class="about-cred"><div class="about-cred-dot"></div>מרצה בכיר · מכללת תל-חי</div>
+        <div class="about-cred"><div class="about-cred-dot"></div>חבר ILGBC · עמותה ישראלית לבנייה ירוקה</div>
+        <div class="about-cred"><div class="about-cred-dot"></div>חבר IAUA · ארגון אדריכלים מאוחדים</div>
+        <div class="about-cred"><div class="about-cred-dot"></div>חבר iisbe Israel · מכון קיימא</div>
+      </div>
+      <div class="about-stat sr sr-delay-4">
+        <div class="about-stat-num" data-count="2003">0</div>
+        <div class="about-stat-lbl">שנת ייסוד המשרד</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AI ═══ -->
+<section id="ai">
+  <div class="ai-bg-glow"></div>
+  <div class="ai-header sr">
+    <div class="section-label" style="text-align:center;margin-bottom:20px;">בינה מלאכותית + ירוק</div>
+    <div class="ai-title">תכנון מדויק פי 10</div>
+    <div class="ai-equation">
+      יובל + <span class="ai-eq-accent">AI</span> = תוצאות טובות יותר
+    </div>
+    <p class="ai-sub">כלי AI מתקדמים הופכים כל תהליך ייעוץ לחד, מהיר ומדויק — עם ROI שרואים כבר בשלב התכנון.</p>
+  </div>
+  <div class="ai-grid">
+    <div class="ai-card sr">
+      <div class="ai-card-num">01</div>
+      <div class="ai-card-title">סימולציה אנרגטית מיידית</div>
+      <div class="ai-card-body">1,000 תרחישים של בידוד, כיוון וחלונות — תוך שניות, לא ימים.</div>
+    </div>
+    <div class="ai-card sr sr-delay-1">
+      <div class="ai-card-num">02</div>
+      <div class="ai-card-title">בחירת חומרים אוטומטית</div>
+      <div class="ai-card-body">ניתוח λ, עלות ועמידות — המלצה מדויקת לכל קיר, גג וחלון.</div>
+    </div>
+    <div class="ai-card sr sr-delay-2">
+      <div class="ai-card-num">03</div>
+      <div class="ai-card-title">חישוב ROI מיידי</div>
+      <div class="ai-card-body">בכמה שנים מחזירים את ההשקעה? חישוב מדויק לפני ההחלטה.</div>
+    </div>
+    <div class="ai-card sr sr-delay-3">
+      <div class="ai-card-num">04</div>
+      <div class="ai-card-title">ניקוד ת"י 5281 בזמן אמת</div>
+      <div class="ai-card-body">מעקב אוטומטי — רואים בדיוק איפה אפשר לשפר לפני שבונים.</div>
+    </div>
+    <div class="ai-card sr sr-delay-4">
+      <div class="ai-card-num">05</div>
+      <div class="ai-card-title">ניתוח אקלים וסביבה</div>
+      <div class="ai-card-body">שמש, רוח, נוף ורעש — ניתוח מלא לפי אטלס האקלים הישראלי.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPROACH ═══ -->
+<section id="approach">
+  <div class="section-header sr">
+    <div class="section-label">התהליך שלנו</div>
+    <div class="section-count">מגיבוש הרעיון ועד העץ בגינה</div>
+  </div>
+  <div class="approach-steps">
+    <div class="approach-step sr">
+      <div class="step-num">שלב 01</div>
+      <div class="step-title">גיבוש חזון ירוק</div>
+      <div class="step-body">פגישת עומק להבנת הצרכים, המטרות הסביבתיות, ותקציב הפרויקט. הגדרת יעדי קיימות ריאליים ומדידים.</div>
+      <div class="step-bar"><div class="step-bar-fill"></div></div>
+    </div>
+    <div class="approach-step sr sr-delay-1">
+      <div class="step-num">שלב 02</div>
+      <div class="step-title">תכנון ומודלינג AI</div>
+      <div class="step-body">סימולציות אנרגיה, בחירת חומרים ירוקים, ותכנון מבנה אופטימלי לפי אטלס האקלים הישראלי.</div>
+      <div class="step-bar"><div class="step-bar-fill"></div></div>
+    </div>
+    <div class="approach-step sr sr-delay-2">
+      <div class="step-num">שלב 03</div>
+      <div class="step-title">ביצוע וניהול</div>
+      <div class="step-body">ליווי צמוד בשטח, בקרת איכות ירוקה, ועמידה בדרישות ההסמכה — LEED, BREEAM, או ת"י 5281.</div>
+      <div class="step-bar"><div class="step-bar-fill"></div></div>
+    </div>
+    <div class="approach-step sr sr-delay-3">
+      <div class="step-num">שלב 04</div>
+      <div class="step-title">הסמכה ועץ בגינה</div>
+      <div class="step-body">קבלת הסמכה הבינלאומית, מסירת הפרויקט, ומעקב אחר ביצועי האנרגיה בשנה הראשונה.</div>
+      <div class="step-bar"><div class="step-bar-fill"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CLIENTS ═══ -->
+<section id="clients">
+  <div class="clients-label">שיתופי פעולה ומחויבויות</div>
+  <div class="clients-logos">
+    <div class="client-logo">ILGBC · ירוק ישראלי</div>
+    <div class="client-logo">הקרן הקיימת לישראל</div>
+    <div class="client-logo">משרד הבינוי</div>
+    <div class="client-logo">מכללת תל-חי</div>
+    <div class="client-logo">iisbe Israel</div>
+    <div class="client-logo">USGBC · LEED</div>
+    <div class="client-logo">BRE Group · BREEAM</div>
+  </div>
+  <div style="text-align:center;margin-top:60px;">
+    <a href="projects/index.html" class="big-cta magnetic" style="font-size:13px;padding:18px 48px;">
+      ראו פרויקטים נבחרים ←
+    </a>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-pre sr">בואו נדבר</div>
+    <h2 class="contact-title sr">
+      בואו<br>
+      <span class="g">לבנות<br>ירוק.</span>
+    </h2>
+    <a href="mailto:yuvalarc@gmail.com" class="contact-email sr sr-delay-1 magnetic">
+      yuvalarc@gmail.com
+    </a>
+    <div class="contact-info sr sr-delay-2">
+      <div class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        052-6256593/4
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        04-6954118
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🌐</div>
+        www.alimi-arc.co.il
+      </div>
+    </div>
+    <a href="mailto:yuvalarc@gmail.com" class="big-cta magnetic sr sr-delay-3">
+      שלח הודעה ←
+    </a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-left">© 2025 אדריכל יובל אלימי · כל הזכויות שמורות</div>
+  <div class="footer-right">סטודיו לאדריכלות בת קיימא · נתניה</div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   NOISE CANVAS
+══════════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('noise');
+  const ctx=c.getContext('2d');
+  let w,h,id;
+  function resize(){
+    w=c.width=window.innerWidth;
+    h=c.height=window.innerHeight;
+  }
+  function drawNoise(){
+    const d=ctx.createImageData(w,h);
+    const buf=d.data;
+    for(let i=0;i<buf.length;i+=4){
+      const v=Math.random()*255|0;
+      buf[i]=buf[i+1]=buf[i+2]=v;
+      buf[i+3]=255;
+    }
+    ctx.putImageData(d,0,0);
+    id=requestAnimationFrame(drawNoise);
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  drawNoise();
+})();
+
+/* ══════════════════════════════════════════
+   CURSOR
+══════════════════════════════════════════ */
+const cur=document.getElementById('cur');
+const ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('a,button,.service-card,.ai-card,.magnetic').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+document.addEventListener('mousedown',()=>document.body.classList.add('clicking'));
+document.addEventListener('mouseup',()=>document.body.classList.remove('clicking'));
+
+/* ══════════════════════════════════════════
+   WEB AUDIO — Chill Ambient Beat (synthesized, royalty-free)
+   Dm → Am → Bb → F | 76 BPM | lo-fi swing pad + bass + melody
+══════════════════════════════════════════ */
+let audioCtx=null,chillNodes={},soundOn=false;
+const btn=document.getElementById('soundBtn');
+const bars=btn.querySelectorAll('.sound-bar');
+const baseHeights=[6,12,8,14,5];
+
+function createChill(){
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  const ctx=audioCtx;
+
+  const master=ctx.createGain();master.gain.value=0;master.connect(ctx.destination);
+
+  const BPM=76,beat=60/BPM,bar=beat*4;
+
+  /* shared noise buffer */
+  const nLen=Math.floor(ctx.sampleRate*0.5);
+  const nBuf=ctx.createBuffer(1,nLen,ctx.sampleRate);
+  const nd=nBuf.getChannelData(0);
+  for(let i=0;i<nLen;i++) nd[i]=Math.random()*2-1;
+
+  /* reverb — feedback delay + LPF */
+  const rvDly=ctx.createDelay(1.5);rvDly.delayTime.value=0.31;
+  const rvFB=ctx.createGain();rvFB.gain.value=0.36;
+  const rvFlt=ctx.createBiquadFilter();rvFlt.type='lowpass';rvFlt.frequency.value=2400;
+  const rvOut=ctx.createGain();rvOut.gain.value=0.34;
+  rvDly.connect(rvFlt);rvFlt.connect(rvFB);rvFB.connect(rvDly);
+  rvFlt.connect(rvOut);rvOut.connect(master);
+
+  /* vinyl warmth — very subtle broadband noise */
+  const vBuf=ctx.createBuffer(1,ctx.sampleRate*4,ctx.sampleRate);
+  const vd=vBuf.getChannelData(0);
+  for(let i=0;i<vd.length;i++) vd[i]=Math.random()*2-1;
+  const vSrc=ctx.createBufferSource();vSrc.buffer=vBuf;vSrc.loop=true;
+  const vFlt=ctx.createBiquadFilter();vFlt.type='bandpass';vFlt.frequency.value=1800;
+  const vG=ctx.createGain();vG.gain.value=0.011;
+  vSrc.connect(vFlt);vFlt.connect(vG);vG.connect(master);vSrc.start();
+
+  /* ── PAD ── detuned triangle oscillators, slow attack */
+  function pad(freqs,t,dur){
+    freqs.forEach(f=>{
+      [-6,0,6].forEach(dt=>{
+        const o=ctx.createOscillator(),g=ctx.createGain(),flt=ctx.createBiquadFilter();
+        flt.type='lowpass';flt.frequency.value=1400;
+        o.type='triangle';o.frequency.value=f;o.detune.value=dt;
+        g.gain.setValueAtTime(0,t);
+        g.gain.linearRampToValueAtTime(0.048,t+1.9);
+        g.gain.setValueAtTime(0.048,t+dur-1.6);
+        g.gain.linearRampToValueAtTime(0,t+dur);
+        o.connect(flt);flt.connect(g);
+        g.connect(master);g.connect(rvDly);
+        o.start(t);o.stop(t+dur+0.2);
+      });
+    });
+  }
+
+  /* ── BASS ── sine, pitch envelope drop */
+  function bass(f,t,dur){
+    const o=ctx.createOscillator(),g=ctx.createGain(),flt=ctx.createBiquadFilter();
+    flt.type='lowpass';flt.frequency.value=210;
+    o.type='sine';
+    o.frequency.setValueAtTime(f*2,t);
+    o.frequency.exponentialRampToValueAtTime(f,t+0.05);
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(0.26,t+0.07);
+    g.gain.setValueAtTime(0.20,t+dur*0.65);
+    g.gain.linearRampToValueAtTime(0,t+dur);
+    o.connect(flt);flt.connect(g);g.connect(master);
+    o.start(t);o.stop(t+dur+0.1);
+  }
+
+  /* ── KICK ── sine sweep down */
+  function kick(t){
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.type='sine';
+    o.frequency.setValueAtTime(108,t);
+    o.frequency.exponentialRampToValueAtTime(26,t+0.22);
+    g.gain.setValueAtTime(0.72,t);
+    g.gain.exponentialRampToValueAtTime(0.001,t+0.28);
+    o.connect(g);g.connect(master);
+    o.start(t);o.stop(t+0.3);
+  }
+
+  /* ── SNARE ── noise + tone */
+  function snare(t){
+    const s=ctx.createBufferSource();s.buffer=nBuf;
+    const f=ctx.createBiquadFilter();f.type='bandpass';f.frequency.value=3000;f.Q.value=0.8;
+    const g=ctx.createGain();
+    g.gain.setValueAtTime(0.15,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.13);
+    s.connect(f);f.connect(g);g.connect(master);s.start(t);s.stop(t+0.15);
+    const o=ctx.createOscillator(),og=ctx.createGain();
+    o.frequency.setValueAtTime(210,t);o.frequency.exponentialRampToValueAtTime(100,t+0.07);
+    og.gain.setValueAtTime(0.13,t);og.gain.exponentialRampToValueAtTime(0.001,t+0.09);
+    o.connect(og);og.connect(master);o.start(t);o.stop(t+0.1);
+  }
+
+  /* ── HIHAT ── HPF noise burst */
+  function hh(t,vel=0.065){
+    const s=ctx.createBufferSource();s.buffer=nBuf;
+    const f=ctx.createBiquadFilter();f.type='highpass';f.frequency.value=9500;
+    const g=ctx.createGain();
+    g.gain.setValueAtTime(vel,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.04);
+    s.connect(f);f.connect(g);g.connect(master);s.start(t);s.stop(t+0.05);
+  }
+
+  /* ── MELODY ── Dm pentatonic, reverb-drenched */
+  const pent=[294,349,392,440,523,587,698];
+  function mel(t){
+    const f=pent[Math.floor(Math.random()*pent.length)];
+    const dur=beat*(0.4+Math.random()*1.9);
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.type='sine';
+    o.frequency.setValueAtTime(f,t);
+    o.frequency.linearRampToValueAtTime(f*1.007,t+0.12);
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(0.044,t+0.09);
+    g.gain.setValueAtTime(0.044,t+dur*0.5);
+    g.gain.linearRampToValueAtTime(0,t+dur);
+    o.connect(g);g.connect(master);g.connect(rvDly);
+    o.start(t);o.stop(t+dur+0.2);
+  }
+
+  /* ── CHORD PROGRESSION ── Dm Am Bb F */
+  const chords=[
+    {p:[294,349,440],b:73.4},  // Dm
+    {p:[220,262,330],b:55},    // Am
+    {p:[233,294,349],b:58.3},  // Bb
+    {p:[175,220,262],b:43.6},  // F
+  ];
+
+  function schedBar(t,ci){
+    const c=chords[ci%4],sw=beat*0.055;
+    pad(c.p,t,bar+0.9);
+    bass(c.b,t,bar*0.87);
+    /* 8th-note hihats with swing */
+    for(let i=0;i<8;i++){
+      const off=i%2===1;
+      hh(t+i*(beat/2)+(off?sw:0),off?0.036:0.062);
+    }
+    kick(t);
+    if(Math.random()<0.32) kick(t+beat*2+sw);
+    snare(t+beat);
+    snare(t+beat*3);
+    /* 1-3 melody notes per bar */
+    const nm=1+Math.floor(Math.random()*2);
+    for(let i=0;i<nm;i++) mel(t+Math.random()*bar);
+  }
+
+  /* ── LOOKAHEAD SCHEDULER ── */
+  let barCount=0,nextBarTime=ctx.currentTime+0.2,schedTimer=null;
+  function schedule(){
+    while(nextBarTime<ctx.currentTime+0.14){
+      schedBar(nextBarTime,barCount++);
+      nextBarTime+=bar;
+    }
+    schedTimer=setTimeout(schedule,25);
+  }
+  schedule();
+
+  return{master,stop(){clearTimeout(schedTimer);try{vSrc.stop();}catch(e){}}};
+}
+
+function animBars(){
+  if(!soundOn){bars.forEach((b,i)=>{b.style.height=baseHeights[i]+'px';});return;}
+  bars.forEach(b=>{b.style.height=(3+Math.random()*13)+'px';});
+  setTimeout(animBars,110);
+}
+
+btn.addEventListener('click',()=>{
+  if(!soundOn){
+    soundOn=true;btn.classList.remove('off');
+    if(!chillNodes.master) chillNodes=createChill();
+    chillNodes.master.gain.setTargetAtTime(0.62,audioCtx.currentTime,1.8);
+    animBars();
+  } else {
+    soundOn=false;btn.classList.add('off');
+    chillNodes.master.gain.setTargetAtTime(0,audioCtx.currentTime,1.2);
+    bars.forEach((b,i)=>{b.style.height=baseHeights[i]+'px';});
+  }
+});
+
+function playClick(){
+  if(!audioCtx||!soundOn) return;
+  const o=audioCtx.createOscillator();
+  const g=audioCtx.createGain();
+  o.frequency.value=880;o.type='sine';
+  g.gain.setValueAtTime(0.08,audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+0.12);
+  o.connect(g);g.connect(audioCtx.destination);
+  o.start();o.stop(audioCtx.currentTime+0.12);
+}
+function playHover(){
+  if(!audioCtx||!soundOn) return;
+  const o=audioCtx.createOscillator();
+  const g=audioCtx.createGain();
+  o.frequency.value=440;o.type='sine';
+  g.gain.setValueAtTime(0.025,audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+0.06);
+  o.connect(g);g.connect(audioCtx.destination);
+  o.start();o.stop(audioCtx.currentTime+0.06);
+}
+document.querySelectorAll('a,button,.magnetic').forEach(el=>{
+  el.addEventListener('click',playClick);
+  el.addEventListener('mouseenter',playHover);
+});
+
+/* ══════════════════════════════════════════
+   HERO ENTRANCE ANIMATION
+══════════════════════════════════════════ */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const eyebrow=document.getElementById('heroEyebrow');
+    eyebrow.style.opacity='1';eyebrow.style.transform='none';
+  },200);
+  setTimeout(()=>{
+    document.getElementById('hw1').style.transform='translateY(0)';
+    document.getElementById('hw1').style.opacity='1';
+  },400);
+  setTimeout(()=>{
+    document.getElementById('hw2').style.transform='translateY(0)';
+    document.getElementById('hw2').style.opacity='1';
+  },650);
+  setTimeout(()=>{
+    const sub=document.getElementById('heroSub');
+    sub.style.opacity='1';sub.style.transform='none';
+  },900);
+});
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+const srEls=document.querySelectorAll('.sr');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+srEls.forEach(el=>io.observe(el));
+
+/* ══════════════════════════════════════════
+   MANIFESTO TEXT REVEAL
+══════════════════════════════════════════ */
+const mio=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.reveal-word').forEach((w,i)=>{
+        setTimeout(()=>w.style.transform='translateY(0)',i*120);
+      });
+      mio.unobserve(e.target);
+    }
+  });
+},{threshold:.2});
+document.querySelectorAll('#manifestoBig').forEach(el=>mio.observe(el));
+
+/* ══════════════════════════════════════════
+   COUNTER ANIMATION
+══════════════════════════════════════════ */
+function animateCounter(el,target,duration=1800){
+  let start=0,startTime=null;
+  const suffix=el.dataset.suffix||'';
+  function step(ts){
+    if(!startTime) startTime=ts;
+    const p=Math.min((ts-startTime)/duration,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent=Math.floor(ease*target)+suffix;
+    if(p<1) requestAnimationFrame(step);
+    else el.textContent=target+suffix;
+  }
+  requestAnimationFrame(step);
+}
+const cio=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const target=parseInt(e.target.dataset.count);
+      animateCounter(e.target,target);
+      cio.unobserve(e.target);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+/* ══════════════════════════════════════════
+   STEP BARS ON SCROLL
+══════════════════════════════════════════ */
+const stepWidths=['85%','70%','75%','90%'];
+const sbio=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const fills=e.target.querySelectorAll('.step-bar-fill');
+      fills.forEach((f,i)=>{
+        setTimeout(()=>f.style.width=stepWidths[i]||'80%',i*200+300);
+      });
+      sbio.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('#approach').forEach(el=>sbio.observe(el));
+
+/* ══════════════════════════════════════════
+   PARALLAX ON SCROLL
+══════════════════════════════════════════ */
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  const grid=document.querySelector('.hero-grid');
+  const glow=document.querySelector('.ai-bg-glow');
+  if(grid) grid.style.transform=`translateY(${sy*.3}px)`;
+  if(glow) glow.style.transform=`translateX(-50%) translateY(${-sy*.08}px)`;
+});
+
+/* ══════════════════════════════════════════
+   MAGNETIC EFFECT
+══════════════════════════════════════════ */
+document.querySelectorAll('.magnetic').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    const rect=el.getBoundingClientRect();
+    const cx=rect.left+rect.width/2;
+    const cy=rect.top+rect.height/2;
+    const dx=(e.clientX-cx)*.18;
+    const dy=(e.clientY-cy)*.18;
+    el.style.transform=`translate(${dx}px,${dy}px)`;
+  });
+  el.addEventListener('mouseleave',()=>{
+    el.style.transform='';
+  });
+});
+
+/* ══════════════════════════════════════════
+   SMOOTH NAV SCROLL
+══════════════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth'});
+    }
+  });
+});
+</script>
+</body>
+</html>
