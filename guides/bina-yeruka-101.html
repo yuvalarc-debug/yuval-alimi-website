@@ -10,16 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --canvas:         #f0f6f3;
-      --surface-1:      #ffffff;
-      --surface-2:      #e2eeea;
-      --primary:        #2a6658;
-      --primary-bright: #3d887a;
-      --ink:            #152820;
-      --ink-muted:      #486858;
-      --ink-subtle:     #88a898;
-      --hairline:       #bcd4cc;
-      --shadow:         0 2px 20px rgba(42,102,88,0.10);
+      --canvas:         #e4f4ec;
+      --surface-1:      #f2faf6;
+      --surface-2:      #cce8da;
+      --primary:        #1a7860;
+      --primary-bright: #229070;
+      --ink:            #0a1e14;
+      --ink-muted:      #183828;
+      --ink-subtle:     #466858;
+      --hairline:       #9ac8b0;
+      --shadow:         0 2px 20px rgba(26,120,96,0.10);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -35,7 +35,7 @@
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: -1;
-      background: linear-gradient(180deg, #f4f9f6 0%, #eaf4f0 60%, #ddeee8 100%);
+      background: linear-gradient(180deg, #c8e8da 0%, #b4dece 40%, #9ed4c0 80%, #88c8b0 100%);
     }
     a { color: inherit; text-decoration: none; }
 
@@ -44,7 +44,7 @@
       position: fixed; top: 0; right: 0; left: 0; z-index: 100;
       padding: 20px 48px;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(243,247,240,0.88); backdrop-filter: blur(20px);
+      background: rgba(228,244,236,0.88); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--hairline);
     }
     .nav-logo {
@@ -52,10 +52,11 @@
       font-size: 16px; font-weight: 700; color: var(--ink);
     }
     .nav-logo-icon {
-      width: 34px; height: 34px; background: var(--primary);
-      border-radius: 9px; display: flex; align-items: center;
-      justify-content: center; font-size: 13px; font-weight: 800; color: #fff;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
+    .nav-logo-icon svg { width: 44px; height: 44px; }
     .nav-cta {
       padding: 9px 22px; background: var(--primary); color: #fff;
       border-radius: 100px; font-size: 13px; font-weight: 700;
@@ -80,7 +81,7 @@
     .hero-bg::after {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 80% at 35% 50%, rgba(240,248,244,0.45) 0%, transparent 70%);
+      background: radial-gradient(ellipse 70% 80% at 35% 50%, rgba(220,240,252,0.48) 0%, transparent 70%);
     }
     .hero-inner {
       position: relative; z-index: 3;
@@ -94,7 +95,7 @@
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(45,106,79,0.10); border: 1px solid rgba(45,106,79,0.25);
+      background: rgba(26,120,96,0.10); border: 1px solid rgba(26,120,96,0.25);
       border-radius: 100px; padding: 6px 16px; margin-bottom: 24px;
       font-size: 13px; font-weight: 600; color: var(--primary);
     }
@@ -135,7 +136,7 @@
       border-radius: 24px;
       padding: 40px;
       position: sticky; top: 100px;
-      box-shadow: 0 8px 48px rgba(45,106,79,0.12);
+      box-shadow: 0 8px 48px rgba(26,120,96,0.12);
     }
     .form-card-title {
       font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
@@ -152,7 +153,7 @@
       font-family: inherit; direction: rtl; outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(45,106,79,0.12); }
+    .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,120,96,0.12); }
     .form-input::placeholder { color: var(--ink-subtle); }
     .form-submit {
       width: 100%; padding: 16px;
@@ -170,7 +171,7 @@
     }
     .form-success {
       display: none; text-align: center; padding: 16px;
-      background: rgba(45,106,79,0.08); border: 1px solid rgba(45,106,79,0.25);
+      background: rgba(26,120,96,0.08); border: 1px solid rgba(26,120,96,0.25);
       border-radius: 12px; color: var(--primary); font-size: 15px; font-weight: 600;
       margin-top: 12px;
     }
@@ -208,7 +209,7 @@
       box-shadow: var(--shadow);
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .benefit-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(45,106,79,0.14); }
+    .benefit-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(26,120,96,0.14); }
     .benefit-icon { font-size: 32px; margin-bottom: 20px; display: block; }
     .benefit-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
     .benefit-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.7; }
@@ -246,7 +247,7 @@
       width: 120px; height: 120px; border-radius: 50%;
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-bright) 100%);
       border: 3px solid var(--surface-1);
-      box-shadow: 0 4px 24px rgba(45,106,79,0.2);
+      box-shadow: 0 4px 24px rgba(26,120,96,0.2);
       display: flex; align-items: center; justify-content: center;
       font-size: 48px; font-weight: 900; color: #fff;
       flex-shrink: 0;
@@ -275,7 +276,7 @@
       display: flex; align-items: baseline; gap: 20px; margin-bottom: 36px;
     }
     .guide-chapter-num {
-      font-size: 72px; font-weight: 900; color: rgba(45,106,79,0.15);
+      font-size: 72px; font-weight: 900; color: rgba(26,120,96,0.15);
       letter-spacing: -4px; line-height: 1; flex-shrink: 0;
     }
     .guide-chapter-title-wrap { flex: 1; }
@@ -308,8 +309,8 @@
       border-radius: 14px; padding: 24px 28px; margin: 28px 0;
     }
     .callout-green {
-      background: rgba(45,106,79,0.07);
-      border: 1px solid rgba(45,106,79,0.18);
+      background: rgba(26,120,96,0.07);
+      border: 1px solid rgba(26,120,96,0.18);
       border-right: 3px solid var(--primary);
     }
     .callout-yellow {
@@ -360,7 +361,7 @@
       padding: 14px 16px; border-bottom: 1px solid var(--hairline);
       color: var(--ink-muted); vertical-align: top; background: var(--surface-1);
     }
-    .compare-table tr:hover td { background: rgba(45,106,79,0.04); }
+    .compare-table tr:hover td { background: rgba(26,120,96,0.04); }
     .compare-table .highlight { color: var(--ink); font-weight: 600; }
 
     /* Credit list */
@@ -377,7 +378,7 @@
     .credit-list .credit-name { color: var(--ink); font-weight: 600; }
     .credit-list .credit-points {
       color: var(--primary); font-weight: 700; font-size: 13px;
-      background: rgba(82,183,136,0.1); padding: 2px 10px;
+      background: rgba(42,143,171,0.12); padding: 2px 10px;
       border-radius: 100px;
     }
 
@@ -394,7 +395,7 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 14px; font-weight: 800; color: #fff;
       flex-shrink: 0; margin-top: 2px;
-      box-shadow: 0 2px 8px rgba(45,106,79,0.25);
+      box-shadow: 0 2px 8px rgba(26,120,96,0.25);
     }
     .step-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
     .step-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.65; }
@@ -414,7 +415,7 @@
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
       box-shadow: var(--shadow);
     }
-    .strategy-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(45,106,79,0.14); }
+    .strategy-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,120,96,0.14); }
     .strategy-num {
       font-size: 11px; font-weight: 700; letter-spacing: 2px;
       text-transform: uppercase; color: var(--primary); margin-bottom: 10px;
@@ -461,7 +462,7 @@
       background: var(--primary); color: #fff;
       border-radius: 100px; font-size: 18px; font-weight: 800;
       transition: background 0.2s, transform 0.2s;
-      box-shadow: 0 4px 24px rgba(45,106,79,0.25);
+      box-shadow: 0 4px 24px rgba(26,120,96,0.25);
     }
     .cta-btn:hover { background: var(--primary-bright); transform: translateY(-2px); }
 
@@ -495,7 +496,7 @@
       width: 100%; border-radius: 18px; overflow: hidden;
       aspect-ratio: 16 / 6; position: relative;
       margin-bottom: 36px;
-      box-shadow: 0 6px 40px rgba(42,102,88,0.14);
+      box-shadow: 0 6px 40px rgba(26,120,96,0.14);
     }
     .chapter-img img {
       width: 100%; height: 100%; object-fit: cover; display: block;
@@ -517,7 +518,18 @@
   <!-- NAV -->
   <nav>
     <a href="/alimi-resn.html" class="nav-logo">
-      <span class="nav-logo-icon">YA</span>
+      <span class="nav-logo-icon">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="10" fill="#7d8e8a"/>
+          <rect x="7"  y="18" width="14" height="60" fill="white"/>
+          <rect x="7"  y="66" width="34" height="12" fill="white"/>
+          <rect x="47" y="18" width="46" height="13" fill="white"/>
+          <rect x="63" y="31" width="14" height="47" fill="white"/>
+          <path d="M50,82 C45,60 40,38 37,14 C41,37 47,59 53,82 Z" fill="#6aaa1a"/>
+          <path d="M52,87 C46,64 47,40 55,10 C61,38 62,64 56,87 Z" fill="#88c828"/>
+          <path d="M54,80 C60,57 68,36 84,10 C82,34 72,56 57,80 Z" fill="#6aaa1a"/>
+        </svg>
+      </span>
       אדריכל יובל אלימי
     </a>
     <a href="#get-guide" class="nav-cta">קבל את המדריך</a>
@@ -529,135 +541,112 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#f9fbf9"/>
-            <stop offset="50%" stop-color="#eaf4ef"/>
-            <stop offset="100%" stop-color="#d4e8e2"/>
+            <stop offset="0%" stop-color="#b8e4d4"/>
+            <stop offset="55%" stop-color="#9ed4c0"/>
+            <stop offset="100%" stop-color="#84c4ac"/>
           </linearGradient>
           <linearGradient id="m0" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#b8cec8" stop-opacity=".22"/>
-            <stop offset="100%" stop-color="#a8c0bc" stop-opacity=".32"/>
+            <stop offset="0%" stop-color="#a0ccbc" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#88b8a8" stop-opacity=".38"/>
           </linearGradient>
           <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#9ab8b2" stop-opacity=".38"/>
-            <stop offset="100%" stop-color="#88a8a2" stop-opacity=".52"/>
+            <stop offset="0%" stop-color="#70a894" stop-opacity=".42"/>
+            <stop offset="100%" stop-color="#569880" stop-opacity=".58"/>
           </linearGradient>
           <linearGradient id="m2" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#729898" stop-opacity=".52"/>
-            <stop offset="100%" stop-color="#608888" stop-opacity=".65"/>
+            <stop offset="0%" stop-color="#3c8870" stop-opacity=".58"/>
+            <stop offset="100%" stop-color="#28785e" stop-opacity=".74"/>
           </linearGradient>
           <linearGradient id="m3" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#4e7880" stop-opacity=".72"/>
-            <stop offset="100%" stop-color="#3c6870" stop-opacity=".84"/>
+            <stop offset="0%" stop-color="#1a6850" stop-opacity=".82"/>
+            <stop offset="100%" stop-color="#0e5840" stop-opacity=".95"/>
           </linearGradient>
           <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#eef7f4" stop-opacity="0"/>
-            <stop offset="38%" stop-color="#eef7f4" stop-opacity=".88"/>
-            <stop offset="62%" stop-color="#eef7f4" stop-opacity=".88"/>
-            <stop offset="100%" stop-color="#eef7f4" stop-opacity="0"/>
+            <stop offset="0%"   stop-color="#b8e4d4" stop-opacity="0"/>
+            <stop offset="35%"  stop-color="#b8e4d4" stop-opacity=".78"/>
+            <stop offset="65%"  stop-color="#b8e4d4" stop-opacity=".78"/>
+            <stop offset="100%" stop-color="#b8e4d4" stop-opacity="0"/>
           </linearGradient>
-          <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#b8d4ce" stop-opacity=".58"/>
-            <stop offset="100%" stop-color="#9ac0ba" stop-opacity=".35"/>
-          </linearGradient>
-          <filter id="fb"><feGaussianBlur stdDeviation="14"/></filter>
-          <filter id="fm"><feGaussianBlur stdDeviation="6"/></filter>
-          <filter id="fl"><feGaussianBlur stdDeviation="2"/></filter>
+          <filter id="fb"><feGaussianBlur stdDeviation="18"/></filter>
+          <filter id="fm"><feGaussianBlur stdDeviation="7"/></filter>
+          <filter id="fl"><feGaussianBlur stdDeviation="2.5"/></filter>
         </defs>
 
         <!-- Sky -->
         <rect width="1440" height="900" fill="url(#sg)"/>
 
-        <!-- Far background mountains -->
+        <!-- Layer 0 — farthest peaks, very blurry, full width -->
         <path filter="url(#fb)" fill="url(#m0)"
-          d="M380,560 C430,460 475,420 525,388 C565,362 605,372 645,338
-             C682,308 715,320 748,294 C780,268 818,278 852,305
-             C882,328 914,318 948,345 C978,368 1004,398 1034,432
-             C1058,460 1075,490 1098,528 L1098,720 L380,720Z"/>
+          d="M-20,900
+             C 80,510 180,450 300,420 C 400,396 490,412 590,382
+             C 680,356 770,368 860,342 C 950,318 1040,334 1140,362
+             C 1240,390 1340,430 1460,490 L1460,900 Z"/>
 
-        <!-- Mid-distant mountains -->
+        <!-- Layer 1 — far mountains, blurry, full width -->
         <path filter="url(#fb)" fill="url(#m1)"
-          d="M310,640 C348,552 388,510 438,476 C478,448 512,458 548,426
-             C582,396 612,406 646,378 C678,352 712,368 742,392
-             C768,412 796,400 828,376 C860,352 895,368 924,396
-             C950,420 972,450 998,482 C1024,514 1046,546 1072,578
-             C1094,606 1112,634 1140,665 L1140,840 L310,840Z"/>
+          d="M-20,900
+             C 60,590 148,540 240,508 C 330,478 408,494 496,462
+             C 584,432 654,448 730,418 C 808,388 882,404 950,428
+             C 1024,454 1082,438 1158,412 C 1240,384 1340,420 1460,480
+             L1460,900 Z"/>
 
         <!-- Mist band 1 -->
-        <rect x="0" y="460" width="1440" height="115" fill="url(#mist)" filter="url(#fm)" opacity=".6"/>
+        <rect x="0" y="420" width="1440" height="140" fill="url(#mist)" filter="url(#fm)" opacity=".65"/>
 
-        <!-- Middle mountains -->
+        <!-- Layer 2 — middle mountains, full width -->
         <path filter="url(#fm)" fill="url(#m2)"
-          d="M228,740 C268,655 308,612 358,578 C398,550 428,560 464,532
-             C498,506 524,515 558,490 C590,467 618,476 650,453
-             C680,432 708,444 736,426 C762,408 790,424 815,444
-             C840,464 868,455 898,472 C928,490 952,515 982,542
-             C1012,570 1038,598 1070,628 C1098,654 1122,680 1152,708
-             C1176,730 1198,755 1228,780 L1228,900 L228,900Z"/>
+          d="M-20,900
+             C 40,660 110,614 200,578 C 290,544 360,560 440,528
+             C 520,498 580,512 652,482 C 724,454 792,468 858,446
+             C 928,424 990,438 1060,460 C 1132,482 1186,466 1262,442
+             C 1350,414 1420,454 1460,510 L1460,900 Z"/>
 
         <!-- Mist band 2 -->
-        <rect x="0" y="552" width="1440" height="145" fill="url(#mist)" opacity=".92"/>
+        <rect x="0" y="530" width="1440" height="160" fill="url(#mist)" opacity=".88"/>
 
-        <!-- Left main mountain -->
-        <path fill="url(#m3)"
-          d="M0,900 L0,82
-             C22,58 48,32 76,18 C102,4 130,-2 156,12
-             C180,26 198,54 212,84 C224,110 232,140 240,170
-             C248,198 256,225 268,252 C280,278 294,300 308,328
-             C320,356 326,385 332,414 C338,440 343,466 350,492
-             C358,518 368,540 380,564 C392,588 404,610 415,636
-             C425,660 430,684 435,710 C439,732 441,756 443,780
-             C444,800 444,822 444,844 L444,900Z"/>
-
-        <!-- Right main mountain -->
-        <path fill="url(#m3)"
-          d="M1440,900 L1440,118
-             C1420,92 1396,64 1368,44 C1340,24 1310,14 1284,28
-             C1258,42 1240,70 1226,100 C1213,126 1202,155 1192,184
-             C1181,212 1170,238 1158,264 C1145,292 1130,316 1117,344
-             C1105,372 1095,402 1085,430 C1075,456 1065,480 1056,508
-             C1047,534 1040,560 1034,588 C1027,615 1023,642 1018,669
-             C1014,694 1011,720 1008,746 C1005,768 1003,792 1001,816
-             L998,900Z"/>
-
-        <!-- Water / lake reflection -->
-        <ellipse cx="720" cy="862" rx="268" ry="30" fill="url(#wg)" filter="url(#fl)"/>
-        <ellipse cx="720" cy="862" rx="185" ry="18" fill="rgba(200,228,222,.32)"/>
+        <!-- Layer 3 — near ridge, full width, sharpest -->
+        <path filter="url(#fl)" fill="url(#m3)"
+          d="M-20,900
+             C 30,800 82,758 160,722 C 232,690 292,704 362,672
+             C 436,640 492,654 562,622 C 634,592 698,606 766,580
+             C 836,556 898,568 966,548 C 1038,528 1102,542 1172,562
+             C 1252,584 1322,568 1398,546 C 1432,536 1450,548 1460,572
+             L1460,900 Z"/>
 
         <!-- Foreground mist -->
-        <rect x="0" y="730" width="1440" height="170" fill="url(#mist)" opacity=".5"/>
+        <rect x="0" y="700" width="1440" height="200" fill="url(#mist)" opacity=".42"/>
 
         <!-- Trees left -->
-        <g fill="#2e4848" opacity=".68">
-          <line x1="96" y1="882" x2="96" y2="808" stroke="#2e4848" stroke-width="2.2"/>
+        <g fill="#1a3c58" opacity=".68">
+          <line x1="96"  y1="882" x2="96"  y2="808" stroke="#1a3c58" stroke-width="2.2"/>
           <path d="M80,828 Q96,798 112,828 Q96,815 80,828Z"/>
           <path d="M82,813 Q96,784 110,813 Q96,800 82,813Z"/>
-          <line x1="150" y1="888" x2="150" y2="824" stroke="#2e4848" stroke-width="1.8"/>
+          <line x1="150" y1="888" x2="150" y2="824" stroke="#1a3c58" stroke-width="1.8"/>
           <path d="M136,842 Q150,815 164,842 Q150,830 136,842Z"/>
           <path d="M138,828 Q150,805 162,828 Q150,818 138,828Z"/>
-          <line x1="54" y1="890" x2="54" y2="848" stroke="#2e4848" stroke-width="1.4"/>
+          <line x1="54"  y1="890" x2="54"  y2="848" stroke="#1a3c58" stroke-width="1.4"/>
           <path d="M44,860 Q54,840 64,860 Q54,851 44,860Z"/>
         </g>
 
         <!-- Trees right -->
-        <g fill="#2e4848" opacity=".68">
-          <line x1="1316" y1="882" x2="1316" y2="808" stroke="#2e4848" stroke-width="2.2"/>
+        <g fill="#1a3c58" opacity=".68">
+          <line x1="1316" y1="882" x2="1316" y2="808" stroke="#1a3c58" stroke-width="2.2"/>
           <path d="M1300,828 Q1316,798 1332,828 Q1316,815 1300,828Z"/>
           <path d="M1302,813 Q1316,784 1330,813 Q1316,800 1302,813Z"/>
-          <line x1="1368" y1="888" x2="1368" y2="824" stroke="#2e4848" stroke-width="1.8"/>
+          <line x1="1368" y1="888" x2="1368" y2="824" stroke="#1a3c58" stroke-width="1.8"/>
           <path d="M1354,842 Q1368,815 1382,842 Q1368,830 1354,842Z"/>
           <path d="M1356,828 Q1368,805 1380,828 Q1368,818 1356,828Z"/>
-          <line x1="1258" y1="890" x2="1258" y2="850" stroke="#2e4848" stroke-width="1.4"/>
+          <line x1="1258" y1="890" x2="1258" y2="850" stroke="#1a3c58" stroke-width="1.4"/>
           <path d="M1248,862 Q1258,842 1268,862 Q1258,853 1248,862Z"/>
         </g>
 
-        <!-- Foreground rocks left -->
-        <path d="M0,900 C18,882 46,874 76,878 C105,882 130,893 160,890
-                 C182,888 204,880 228,884 C248,888 268,896 285,894 L285,900Z"
-          fill="#3a5255" opacity=".52"/>
-        <!-- Foreground rocks right -->
-        <path d="M1155,900 C1175,886 1202,878 1232,882 C1262,886 1290,895 1318,892
-                 C1342,889 1368,880 1396,884 C1418,887 1432,895 1440,898 L1440,900Z"
-          fill="#3a5255" opacity=".52"/>
+        <!-- Foreground shore -->
+        <path d="M-20,900 C40,880 100,872 170,876 C240,880 310,892 390,888
+                 C460,885 530,876 610,880 C680,884 760,894 840,892 L840,900Z"
+          fill="#163858" opacity=".50"/>
+        <path d="M600,900 C700,884 800,876 900,880 C1000,884 1100,894 1200,890
+                 C1290,887 1370,878 1460,882 L1460,900Z"
+          fill="#163858" opacity=".50"/>
       </svg>
     </div>
     <div class="hero-inner">
@@ -1351,8 +1340,8 @@
       let W, H, pts = [];
       const mouse = { x: null, y: null };
       const PALETTE = [
-        [42, 102, 88], [61, 136, 122], [90, 155, 130],
-        [136, 185, 165], [170, 210, 195], [50, 120, 100]
+        [26, 120, 96], [38, 144, 114], [60, 164, 132],
+        [90, 188, 155], [130, 210, 178], [20, 96, 78]
       ];
 
       function resize() {
@@ -1416,7 +1405,7 @@
               ctx.beginPath();
               ctx.moveTo(pts[i].x, pts[i].y);
               ctx.lineTo(pts[j].x, pts[j].y);
-              ctx.strokeStyle = 'rgba(42,102,88,' + (0.07 * (1 - d / 95)).toFixed(3) + ')';
+              ctx.strokeStyle = 'rgba(26,120,96,' + (0.07 * (1 - d / 95)).toFixed(3) + ')';
               ctx.lineWidth = 0.6;
               ctx.stroke();
             }

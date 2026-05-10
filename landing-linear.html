@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>יובל עלימי — ייעוץ בנייה ירוקה וקיימות</title>
+  <title>אדריכל יובל אלימי — סטודיו לאדריכלות בת קיימא</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -173,20 +173,14 @@
       gap: 10px;
     }
     .nav__logo-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--primary);
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
-      font-weight: 900;
-      color: #050a05;
-      flex-shrink: 0;
-      margin-left: 0;
-      margin-right: 0;
     }
+    .nav__logo-icon svg { width: 40px; height: 40px; }
     .nav__logo-name {
       font-size: 15px;
       font-weight: 700;
@@ -921,9 +915,9 @@
 <nav class="nav" id="mainNav" role="navigation" aria-label="ניווט ראשי">
   <div class="container">
     <div class="nav__inner">
-      <a href="#" class="nav__logo" aria-label="יובל עלימי — דף הבית">
-        <div class="nav__logo-icon">YA</div>
-        <span class="nav__logo-name">יובל עלימי</span>
+      <a href="#" class="nav__logo" aria-label="אדריכל יובל אלימי — דף הבית">
+        <div class="nav__logo-icon"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="10" fill="#7d8e8a"/><rect x="7" y="18" width="14" height="60" fill="white"/><rect x="7" y="66" width="34" height="12" fill="white"/><rect x="47" y="18" width="46" height="13" fill="white"/><rect x="63" y="31" width="14" height="47" fill="white"/><path d="M50,82 C45,60 40,38 37,14 C41,37 47,59 53,82 Z" fill="#6aaa1a"/><path d="M52,87 C46,64 47,40 55,10 C61,38 62,64 56,87 Z" fill="#88c828"/><path d="M54,80 C60,57 68,36 84,10 C82,34 72,56 57,80 Z" fill="#6aaa1a"/></svg></div>
+        <span class="nav__logo-name">אדריכל יובל אלימי</span>
       </a>
       <ul class="nav__links" role="list">
         <li><a href="#services">שירותים</a></li>
@@ -952,18 +946,19 @@
 
       <div class="hero__title-wrap" id="heroTitle">
         <div class="hero__title-line-wrap">
-          <span class="hero__title-line">בונים</span>
+          <span class="hero__title-line">סטודיו לאדריכלות</span>
         </div>
         <div class="hero__title-line-wrap">
-          <span class="hero__title-line">את העתיד</span>
-        </div>
-        <div class="hero__title-line-wrap">
-          <span class="hero__title-line" style="color: var(--primary);">הירוק</span>
+          <span class="hero__title-line" style="color: var(--primary);">בת קיימא</span>
         </div>
       </div>
 
+      <p class="hero__sub" style="font-size:1.35em; font-weight:600; margin-bottom:0.5em;">
+        אדריכלות שעובדת עם הטבע
+      </p>
+
       <p class="hero__sub">
-        ייעוץ מקצועי לתכנון, הסמכה, וניהול מבנים ירוקים. LEED, BREEAM, ודירוג ירוק ישראלי — מההחלטה הראשונה ועד הלוחית על הקיר.
+        ייעוץ מקצועי לתכנון, הסמכה, וניהול מבנים ירוקים. LEED, BREEAM, ודירוג ירוק ישראלי — מההחלטה הראשונה ועד העץ בגינה.
       </p>
 
       <div class="hero__ctas">
@@ -1281,8 +1276,8 @@
       <!-- Brand -->
       <div>
         <div class="nav__logo" style="display:inline-flex;">
-          <div class="nav__logo-icon">YA</div>
-          <span class="nav__logo-name" style="margin-right:10px;">יובל עלימי</span>
+          <div class="nav__logo-icon"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="10" fill="#7d8e8a"/><rect x="7" y="18" width="14" height="60" fill="white"/><rect x="7" y="66" width="34" height="12" fill="white"/><rect x="47" y="18" width="46" height="13" fill="white"/><rect x="63" y="31" width="14" height="47" fill="white"/><path d="M50,82 C45,60 40,38 37,14 C41,37 47,59 53,82 Z" fill="#6aaa1a"/><path d="M52,87 C46,64 47,40 55,10 C61,38 62,64 56,87 Z" fill="#88c828"/><path d="M54,80 C60,57 68,36 84,10 C82,34 72,56 57,80 Z" fill="#6aaa1a"/></svg></div>
+          <span class="nav__logo-name" style="margin-right:10px;">אדריכל יובל אלימי</span>
         </div>
         <p class="footer-brand-desc">ייעוץ מקצועי לבנייה ירוקה וקיימות — LEED, BREEAM, ודירוג ירוק ישראלי.</p>
       </div>
@@ -1321,7 +1316,7 @@
     </div>
 
     <div class="footer-bar">
-      <span class="footer-copy">© 2025 יובל עלימי. כל הזכויות שמורות.</span>
+      <span class="footer-copy">© 2025 אדריכל יובל אלימי. כל הזכויות שמורות.</span>
       <div class="footer-bar-links">
         <a href="#">מדיניות פרטיות</a>
         <a href="#">תנאי שימוש</a>
